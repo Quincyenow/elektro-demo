@@ -1,255 +1,383 @@
 ---
+import Layout from '../layouts/Layout.astro';
 ---
-<!doctype html>
-<html lang="de">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Elektro Stebel – Elektromeisterbetrieb in Hannover</title>
+
+<Layout title="Elektro Stebel – Elektromeisterbetrieb in Hannover">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;color:#111;background:#fff}
-a{text-decoration:none;color:inherit}
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --yellow:#F5C842;
+    --yellow-dark:#D4A900;
+    --black:#0D0D0D;
+    --gray:#1A1A1A;
+    --gray-mid:#161616;
+    --text-muted:#888;
+    --white:#FFFFFF;
+  }
+  body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);line-height:1.6}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap');
 
-/* HEADER */
-header{background:#fff;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100}
-.logo{font-size:20px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
-nav a{margin-left:32px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#111;transition:color .2s}
-nav a:hover{color:#FBBF24}
-.nav-btn{background:#FBBF24;color:#000;padding:10px 24px;border-radius:4px;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.2rem 2rem;
+    background:rgba(13,13,13,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-0.02em}
+  .nav-logo span{color:var(--yellow)}
+  .nav-links{display:flex;gap:2rem}
+  .nav-links a{font-size:0.85rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--white)}
+  .nav-cta{
+    background:var(--yellow);color:var(--black);
+    padding:0.5rem 1.2rem;border-radius:6px;
+    font-size:0.85rem;font-weight:600;text-decoration:none;
+    transition:background 0.2s;
+  }
+  .nav-cta:hover{background:var(--yellow-dark)}
 
-/* HERO */
-.hero{position:relative;height:90vh;overflow:hidden}
-.hero img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.75) 50%,rgba(0,0,0,.2))}
-.hero-content{position:absolute;top:50%;left:60px;transform:translateY(-50%);max-width:600px}
-.hero-tag{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FBBF24;margin-bottom:16px}
-.hero-content h1{font-size:52px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:24px}
-.hero-content p{font-size:17px;color:#d1d5db;margin-bottom:36px;line-height:1.6}
-.btn-yellow{background:#FBBF24;color:#000;padding:16px 36px;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:4px;display:inline-block;transition:transform .2s}
-.btn-yellow:hover{transform:scale(1.03)}
+  .hero{
+    min-height:100vh;
+    display:grid;grid-template-columns:1fr 1fr;
+    align-items:center;
+    padding:8rem 2rem 4rem;
+    gap:4rem;
+    max-width:1200px;margin:0 auto;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:1.5rem;
+  }
+  .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--yellow)}
+  .hero h1{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:clamp(2.5rem,5vw,4rem);
+    line-height:1.05;letter-spacing:-0.03em;
+    margin-bottom:1.5rem;
+  }
+  .hero h1 em{color:var(--yellow);font-style:normal}
+  .hero-sub{color:var(--text-muted);font-size:1rem;max-width:420px;margin-bottom:2rem;line-height:1.7}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
 
-/* TICKER */
-.ticker{background:#FBBF24;padding:12px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:scroll 25s linear infinite}
-.ticker-track span{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#000;margin:0 48px}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .btn-primary{
+    background:var(--yellow);color:var(--black);
+    padding:0.85rem 1.8rem;border-radius:8px;
+    font-weight:600;font-size:0.9rem;text-decoration:none;
+    transition:background 0.2s,transform 0.15s;display:inline-block;
+  }
+  .btn-primary:hover{background:var(--yellow-dark);transform:translateY(-1px)}
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,0.15);
+    padding:0.85rem 1.8rem;border-radius:8px;
+    font-size:0.9rem;color:var(--white);text-decoration:none;
+    transition:border-color 0.2s,background 0.2s;display:inline-block;
+  }
+  .btn-ghost:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.04)}
 
-/* ABOUT */
-.about{padding:100px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto}
-.about h2{font-size:40px;font-weight:900;line-height:1.2;margin-bottom:24px}
-.about h2 em{font-style:normal;background:#FBBF24;padding:2px 6px}
-.about p{font-size:16px;color:#555;line-height:1.8;margin-bottom:16px}
-.about-link{display:inline-block;margin-top:8px;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid #FBBF24;padding-bottom:2px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.stat{background:#f5f5f5;padding:28px;border-radius:8px;text-align:center}
-.stat strong{display:block;font-size:38px;font-weight:900;color:#FBBF24;margin-bottom:4px}
-.stat span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#666}
+  .hero-visual{
+    position:relative;border-radius:16px;overflow:hidden;
+    aspect-ratio:4/3;background:var(--gray);
+  }
+  .hero-visual img{width:100%;height:100%;object-fit:cover;opacity:0.85}
+  .hero-badge{
+    position:absolute;bottom:1.5rem;left:1.5rem;
+    background:rgba(13,13,13,0.88);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;padding:0.75rem 1rem;
+    display:flex;gap:1.5rem;
+  }
+  .badge-stat{text-align:center}
+  .badge-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--yellow)}
+  .badge-stat-label{font-size:0.7rem;color:var(--text-muted);letter-spacing:0.04em}
 
-/* LEISTUNGEN */
-.leistungen{background:#f9f9f9;padding:100px 60px}
-.leistungen-header{text-align:center;margin-bottom:60px}
-.leistungen-header h2{font-size:40px;font-weight:900;margin-bottom:12px}
-.leistungen-header p{font-size:16px;color:#666;max-width:500px;margin:0 auto}
-.leistungen-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto}
-.leistung{background:#fff;padding:36px 24px;border-radius:8px;text-align:center;transition:box-shadow .2s;border:2px solid transparent}
-.leistung:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);border-color:#FBBF24}
-.leistung .icon{font-size:44px;margin-bottom:16px;display:block}
-.leistung h3{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+  .ticker-wrap{background:var(--yellow);overflow:hidden;padding:0.7rem 0}
+  .ticker{display:flex;gap:3rem;white-space:nowrap;animation:tick 22s linear infinite}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker-item{font-size:0.8rem;font-weight:600;color:var(--black);letter-spacing:0.04em;text-transform:uppercase}
+  .ticker-dot{color:rgba(0,0,0,0.3);margin:0 0.5rem}
 
-/* PROZESS */
-.prozess{padding:100px 60px;background:#111}
-.prozess h2{font-size:40px;font-weight:900;color:#fff;text-align:center;margin-bottom:60px}
-.prozess-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:1100px;margin:0 auto}
-.step{text-align:center}
-.step-num{width:60px;height:60px;background:#FBBF24;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#000;margin:0 auto 20px}
-.step h3{font-size:15px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.step p{font-size:13px;color:#9CA3AF;line-height:1.7}
+  .section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+  .section-full{padding:5rem 2rem;background:var(--gray-mid)}
+  .section-full-inner{max-width:1200px;margin:0 auto}
+  .section-eye{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:0.75rem}
+  .section-title{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:clamp(1.8rem,3vw,2.6rem);
+    letter-spacing:-0.02em;margin-bottom:1rem;
+  }
+  .section-sub{color:var(--text-muted);max-width:480px;line-height:1.7;margin-bottom:3rem}
 
-/* BEWERTUNGEN */
-.bewertungen{padding:100px 60px;background:#fff}
-.bewertungen h2{font-size:40px;font-weight:900;text-align:center;margin-bottom:60px}
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
-.review{background:#f9f9f9;padding:36px;border-radius:8px;border-left:4px solid #FBBF24}
-.stars{color:#FBBF24;font-size:18px;margin-bottom:16px}
-.review p{font-size:14px;color:#444;line-height:1.8;margin-bottom:20px}
-.review strong{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .about-text p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .stat-card{
+    background:var(--gray);border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:1.5rem;
+  }
+  .stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--yellow)}
+  .stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem}
 
-/* KONTAKT */
-.kontakt{background:#FBBF24;padding:100px 60px}
-.kontakt-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.kontakt h2{font-size:44px;font-weight:900;color:#000;line-height:1.2}
-.kontakt p{font-size:16px;color:#333;margin-top:12px}
-.kontakt-actions{display:flex;flex-direction:column;gap:16px}
-.btn-dark{background:#000;color:#fff;padding:18px 40px;font-size:15px;font-weight:800;letter-spacing:1px;border-radius:4px;text-align:center;transition:transform .2s}
-.btn-dark:hover{transform:scale(1.03)}
-.kontakt-info{font-size:14px;color:#333;line-height:2}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .service-card{
+    background:var(--gray);border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:1.5rem;
+    transition:border-color 0.2s,transform 0.2s;
+  }
+  .service-card:hover{border-color:var(--yellow);transform:translateY(-3px)}
+  .service-icon{font-size:1.5rem;margin-bottom:0.75rem}
+  .service-name{font-weight:600;font-size:0.95rem}
+  .service-desc{font-size:0.82rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5}
 
-/* FOOTER */
-footer{background:#000;padding:40px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
-.footer-logo{font-size:18px;font-weight:900;letter-spacing:2px;color:#FBBF24;text-transform:uppercase}
-footer p{font-size:13px;color:#555}
-.footer-links a{color:#555;font-size:13px;margin-left:20px;transition:color .2s}
-.footer-links a:hover{color:#FBBF24}
+  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .step{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
+  .step-num{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--yellow);color:var(--black);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;
+    margin-bottom:1rem;
+  }
+  .step-title{font-weight:600;margin-bottom:0.4rem}
+  .step-desc{font-size:0.82rem;color:var(--text-muted);line-height:1.5}
+
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .review-card{
+    background:var(--gray);border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:1.5rem;
+  }
+  .review-stars{color:var(--yellow);font-size:0.9rem;margin-bottom:1rem}
+  .review-text{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;font-style:italic}
+  .review-author{font-size:0.82rem;font-weight:600}
+
+  .contact-wrap{
+    background:var(--gray);border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;padding:3rem;
+    display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+  }
+  .contact-info p{color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7}
+  .contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
+  .contact-detail-icon{
+    width:36px;height:36px;border-radius:8px;
+    background:rgba(245,200,66,0.12);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;flex-shrink:0;
+  }
+  .contact-detail-text{font-size:0.88rem;color:var(--text-muted)}
+  .contact-detail-text strong{color:var(--white);display:block;font-size:0.92rem}
+  .contact-cta p{color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem}
+  .btn-large{
+    display:block;width:100%;
+    background:var(--yellow);color:var(--black);
+    padding:1rem;border-radius:10px;
+    font-weight:700;font-size:1rem;text-align:center;text-decoration:none;
+    transition:background 0.2s,transform 0.15s;margin-bottom:0.75rem;
+  }
+  .btn-large:hover{background:var(--yellow-dark);transform:translateY(-1px)}
+  .btn-large-ghost{
+    display:block;width:100%;
+    border:1px solid rgba(255,255,255,0.12);color:var(--white);
+    padding:1rem;border-radius:10px;
+    font-size:0.9rem;text-align:center;text-decoration:none;
+    transition:border-color 0.2s;
+  }
+  .btn-large-ghost:hover{border-color:rgba(255,255,255,0.3)}
+
+  footer{
+    border-top:1px solid rgba(255,255,255,0.06);
+    padding:2rem;
+    display:flex;justify-content:space-between;align-items:center;
+    max-width:1200px;margin:0 auto;
+  }
+  .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem}
+  .footer-logo span{color:var(--yellow)}
+  .footer-copy{font-size:0.8rem;color:var(--text-muted)}
+  .footer-links{display:flex;gap:1.5rem}
+  .footer-links a{font-size:0.8rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
+  .footer-links a:hover{color:var(--white)}
+
+  @media(max-width:768px){
+    .hero{grid-template-columns:1fr;padding-top:6rem}
+    .hero-visual{display:none}
+    .about-grid,.contact-wrap{grid-template-columns:1fr}
+    .process-steps{grid-template-columns:1fr 1fr}
+    .reviews-grid{grid-template-columns:1fr}
+    nav .nav-links{display:none}
+    footer{flex-direction:column;gap:1rem;text-align:center}
+  }
 </style>
-</head>
-<body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">⚡ Elektro Stebel</div>
-  <nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+<nav>
+  <div class="nav-logo">⚡ Elektro <span>Stebel</span></div>
+  <div class="nav-links">
     <a href="#leistungen">Leistungen</a>
     <a href="#prozess">Ablauf</a>
     <a href="#bewertungen">Bewertungen</a>
-    <a href="#kontakt" class="nav-btn">Kontakt</a>
-  </nav>
-</header>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+  <a href="#kontakt" class="nav-cta">Termin anfragen</a>
+</nav>
 
-<!-- HERO -->
 <div class="hero">
-  <img src="/stebel.jpg" alt="Elektro Stebel – Elektromeister Hannover" />
-  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-tag">Für Sie da in Hannover</div>
-    <h1>Ihr Elektromeisterbetrieb in & um Hannover</h1>
-    <p>Schnell, sauber und zuverlässig. Von Elektroinstallation bis Smart Home – wir sind Ihr kompetenter Ansprechpartner.</p>
-    <a href="#kontakt" class="btn-yellow">Jetzt Termin vereinbaren</a>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span>24h für Sie erreichbar</span>
-    <span>•</span>
-    <span>0511 – 123 456 78</span>
-    <span>•</span>
-    <span>info@elektrostebel.de</span>
-    <span>•</span>
-    <span>Hannover & Umgebung</span>
-    <span>•</span>
-    <span>24h für Sie erreichbar</span>
-    <span>•</span>
-    <span>0511 – 123 456 78</span>
-    <span>•</span>
-    <span>info@elektrostebel.de</span>
-    <span>•</span>
-    <span>Hannover & Umgebung</span>
-    <span>•</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about">
-  <div>
-    <h2>Gemeinsam denken wir <em>Elektrotechnik</em> neu!</h2>
-    <p>In und um Hannover sind wir als Elektromeisterbetrieb für Sie da. Von der Instandhaltung bestehender Systeme bis hin zu Neuinstallationen und Smart-Lösungen – wir sind Ihr kompetenter Ansprechpartner.</p>
-    <p>Mit über 10 Jahren Erfahrung und mehr als 500 abgeschlossenen Projekten stehen wir für Qualität, Pünktlichkeit und faire Preise.</p>
-    <a href="#kontakt" class="about-link">Kostenloses Angebot anfordern →</a>
-  </div>
-  <div class="stats">
-    <div class="stat"><strong>10+</strong><span>Jahre Erfahrung</span></div>
-    <div class="stat"><strong>500+</strong><span>Projekte</span></div>
-    <div class="stat"><strong>24h</strong><span>Erreichbar</span></div>
-    <div class="stat"><strong>100%</strong><span>Zufriedenheit</span></div>
-  </div>
-</section>
-
-<!-- LEISTUNGEN -->
-<section class="leistungen" id="leistungen">
-  <div class="leistungen-header">
-    <h2>Unsere Leistungen</h2>
-    <p>Alles aus einer Hand – von der Planung bis zur Fertigstellung</p>
-  </div>
-  <div class="leistungen-grid">
-    <div class="leistung"><span class="icon">🔌</span><h3>Elektroinstallation</h3></div>
-    <div class="leistung"><span class="icon">💡</span><h3>Beleuchtung & LED</h3></div>
-    <div class="leistung"><span class="icon">🏠</span><h3>Smart Home</h3></div>
-    <div class="leistung"><span class="icon">☀️</span><h3>Photovoltaik</h3></div>
-    <div class="leistung"><span class="icon">🚗</span><h3>Wallbox</h3></div>
-    <div class="leistung"><span class="icon">🚨</span><h3>Störungsdienst</h3></div>
-    <div class="leistung"><span class="icon">🔒</span><h3>Sicherheitstechnik</h3></div>
-    <div class="leistung"><span class="icon">🏗️</span><h3>Gebäudeinstallation</h3></div>
-  </div>
-</section>
-
-<!-- PROZESS -->
-<section class="prozess" id="prozess">
-  <h2>Schritt für Schritt zu Ihrer Lösung</h2>
-  <div class="prozess-grid">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3>Beratung</h3>
-      <p>Sie kontaktieren uns – wir melden uns innerhalb von 24h und besprechen Ihr Projekt.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3>Planung</h3>
-      <p>Wir beraten Sie ganzheitlich und erstellen ein unverbindliches, maßgeschneidertes Angebot.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3>Ausführung</h3>
-      <p>Wir setzen Ihr Projekt professionell um und halten Sie über jeden Schritt informiert.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h3>Fertigstellung</h3>
-      <p>Das Projekt wird fertiggestellt, abgenommen und Sie erhalten alle Unterlagen.</p>
+    <div class="hero-eyebrow">Elektromeisterbetrieb Hannover</div>
+    <h1>Elektrotechnik,<br>die <em>wirklich</em><br>funktioniert.</h1>
+    <p class="hero-sub">Schnell, sauber und zuverlässig. Von der klassischen Installation bis zum Smart Home – in Hannover und Umgebung.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">Jetzt Termin vereinbaren</a>
+      <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
     </div>
   </div>
-</section>
-
-<!-- BEWERTUNGEN -->
-<section class="bewertungen" id="bewertungen">
-  <h2>Das sagen unsere Kunden</h2>
-  <div class="reviews">
-    <div class="review">
-      <div class="stars">★★★★★</div>
-      <p>"Schnelle und professionelle Arbeit. Herr Stebel hat unsere Wallbox perfekt installiert und alles sauber erklärt. Absolute Empfehlung!"</p>
-      <strong>– Michael K., Hannover</strong>
-    </div>
-    <div class="review">
-      <div class="stars">★★★★★</div>
-      <p>"Bei unserem Stromausfall war das Team innerhalb von 2 Stunden vor Ort. Sehr faire Preise und top Leistung!"</p>
-      <strong>– Sandra M., Langenhagen</strong>
-    </div>
-    <div class="review">
-      <div class="stars">★★★★★</div>
-      <p>"Die Smart-Home Installation hat unser Zuhause komplett verändert. Sehr saubere Arbeit und freundlicher Service."</p>
-      <strong>– Thomas B., Garbsen</strong>
-    </div>
-  </div>
-</section>
-
-<!-- KONTAKT -->
-<section class="kontakt" id="kontakt">
-  <div class="kontakt-inner">
-    <div>
-      <h2>Jetzt Termin vereinbaren</h2>
-      <p>Wir sind 24 Stunden täglich für Sie erreichbar – rufen Sie uns einfach an.</p>
-    </div>
-    <div class="kontakt-actions">
-      <a href="tel:+4951112345678" class="btn-dark">📞 0511 – 123 456 78</a>
-      <div class="kontakt-info">
-        E-Mail: info@elektrostebel.de<br>
-        Telefonisch: Mo–So, 24h erreichbar<br>
-        Einsatzgebiet: Hannover & Umgebung
+  <div class="hero-visual">
+    <img src="/stebel.jpg" alt="Elektro Stebel Hannover" />
+    <div class="hero-badge">
+      <div class="badge-stat">
+        <div class="badge-stat-num">10+</div>
+        <div class="badge-stat-label">Jahre Erfahrung</div>
+      </div>
+      <div class="badge-stat">
+        <div class="badge-stat-num">500+</div>
+        <div class="badge-stat-label">Projekte</div>
+      </div>
+      <div class="badge-stat">
+        <div class="badge-stat-num">24h</div>
+        <div class="badge-stat-label">Erreichbar</div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">0511 – 123 456 78 <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">info@elektrostebel.de <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">0511 – 123 456 78 <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">info@elektrostebel.de <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
+  </div>
+</div>
+
+<div class="section" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-eye">Über uns</div>
+      <h2 class="section-title">Gemeinsam denken wir Elektrotechnik <em style="color:var(--yellow);font-style:normal">neu</em></h2>
+      <p>In und um Hannover sind wir als Elektromeisterbetrieb für Sie da. Von der Instandhaltung bestehender Systeme bis hin zu Neuinstallationen und Smart-Lösungen.</p>
+      <p>Mit über 10 Jahren Erfahrung und mehr als 500 abgeschlossenen Projekten stehen wir für Qualität, Pünktlichkeit und faire Preise.</p>
+      <br>
+      <a href="#kontakt" class="btn-primary">Kostenloses Angebot anfordern →</a>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Jahre Erfahrung</div></div>
+      <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Abgeschlossene Projekte</div></div>
+      <div class="stat-card"><div class="stat-num">24h</div><div class="stat-label">Erreichbar</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Kundenzufriedenheit</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-full" id="leistungen">
+  <div class="section-full-inner">
+    <div class="section-eye">Leistungen</div>
+    <h2 class="section-title">Alles aus einer Hand</h2>
+    <p class="section-sub">Von der Planung bis zur Fertigstellung – wir sind Ihr kompetenter Ansprechpartner.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🔌</div><div class="service-name">Elektroinstallation</div><div class="service-desc">Neuinstallation und Modernisierung elektrischer Anlagen</div></div>
+      <div class="service-card"><div class="service-icon">💡</div><div class="service-name">Beleuchtung & LED</div><div class="service-desc">Energieeffiziente Lichttechnik für jeden Bereich</div></div>
+      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">Smart Home</div><div class="service-desc">Intelligente Haussteuerung und Automatisierung</div></div>
+      <div class="service-card"><div class="service-icon">☀️</div><div class="service-name">Photovoltaik</div><div class="service-desc">Solaranlagen für nachhaltige Energieerzeugung</div></div>
+      <div class="service-card"><div class="service-icon">🚗</div><div class="service-name">Wallbox</div><div class="service-desc">E-Ladestation für zuhause – schnell und sicher</div></div>
+      <div class="service-card"><div class="service-icon">🚨</div><div class="service-name">Störungsdienst</div><div class="service-desc">24h Notfallservice bei Stromausfall & Störungen</div></div>
+      <div class="service-card"><div class="service-icon">🔒</div><div class="service-name">Sicherheitstechnik</div><div class="service-desc">Alarmanlage, Kamera und Zugangskontrolle</div></div>
+      <div class="service-card"><div class="service-icon">🏗️</div><div class="service-name">Gebäudeinstallation</div><div class="service-desc">Elektrik für Neubauten und Gewerbegebäude</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="prozess">
+  <div class="section-eye">Unser Ablauf</div>
+  <h2 class="section-title">Schritt für Schritt zu Ihrer Lösung</h2>
+  <p class="section-sub">Transparent, zuverlässig und ohne Überraschungen.</p>
+  <div class="process-steps">
+    <div class="step"><div class="step-num">1</div><div class="step-title">Beratung</div><div class="step-desc">Sie kontaktieren uns – wir melden uns innerhalb von 24h und besprechen Ihr Projekt.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Planung</div><div class="step-desc">Wir beraten Sie ganzheitlich und erstellen ein unverbindliches Angebot.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Ausführung</div><div class="step-desc">Wir setzen Ihr Projekt professionell um und halten Sie informiert.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Fertigstellung</div><div class="step-desc">Abnahme, Übergabe und vollständige Dokumentation.</div></div>
+  </div>
+</div>
+
+<div class="section-full" id="bewertungen">
+  <div class="section-full-inner">
+    <div class="section-eye">Bewertungen</div>
+    <h2 class="section-title">Das sagen unsere Kunden</h2>
+    <p class="section-sub">Echte Stimmen aus Hannover und Umgebung.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Schnelle und professionelle Arbeit. Herr Stebel hat unsere Wallbox perfekt installiert und alles sauber erklärt. Absolute Empfehlung!"</p>
+        <div class="review-author">Michael K., Hannover</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Bei unserem Stromausfall war das Team innerhalb von 2 Stunden vor Ort. Sehr faire Preise und top Leistung!"</p>
+        <div class="review-author">Sandra M., Langenhagen</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Die Smart-Home Installation hat unser Zuhause komplett verändert. Sehr saubere Arbeit und freundlicher Service."</p>
+        <div class="review-author">Thomas B., Garbsen</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="kontakt">
+  <div class="section-eye">Kontakt</div>
+  <h2 class="section-title">Jetzt Termin vereinbaren</h2>
+  <p class="section-sub">24 Stunden täglich für Sie erreichbar.</p>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p>Wir sind Ihr zuverlässiger Partner für alle Elektroarbeiten in Hannover und Umgebung. Kontaktieren Sie uns – wir melden uns schnell zurück.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text"><strong>0511 – 123 456 78</strong>Mo–So, 24h erreichbar</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text"><strong>info@elektrostebel.de</strong>Antwort innerhalb 24h</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text"><strong>Hannover & Umgebung</strong>Einsatzgebiet Region Hannover</div>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <p>Bereit für Ihr Projekt? Rufen Sie uns an oder schreiben Sie uns.</p>
+      <a href="tel:+4951112345678" class="btn-large">📞 Jetzt anrufen</a>
+      <a href="mailto:info@elektrostebel.de" class="btn-large-ghost">✉️ E-Mail schreiben</a>
+    </div>
+  </div>
+</div>
+
 <footer>
-  <div class="footer-logo">⚡ Elektro Stebel</div>
-  <p>© 2025 Elektro Stebel | Hannover</p>
+  <div class="footer-logo">⚡ Elektro <span>Stebel</span></div>
+  <div class="footer-copy">© 2025 Elektro Stebel | Hannover</div>
   <div class="footer-links">
     <a href="#">Impressum</a>
     <a href="#">Datenschutz</a>
   </div>
 </footer>
 
-</body>
-</html>
+</Layout>
