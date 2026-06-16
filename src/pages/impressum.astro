@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../data/business.ts';
+---
+
+<Layout
+  title={`Impressum – ${business.name}`}
+  description={`Impressum und Anbieterkennzeichnung von ${business.name}, ${business.tagline}.`}
+  canonicalPath="/impressum/"
+>
+  <style>
+    .legal-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.2rem 2rem;max-width:800px;margin:0 auto;
+    }
+    .legal-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;text-decoration:none;color:var(--white)}
+    .legal-logo span{color:var(--yellow)}
+    .legal-back{font-size:0.85rem;color:var(--text-muted);text-decoration:none}
+    .legal-back:hover{color:var(--white)}
+    .legal-wrap{max-width:800px;margin:0 auto;padding:2rem 2rem 5rem}
+    .legal-wrap h1{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;
+      letter-spacing:-0.02em;margin-bottom:2rem;
+    }
+    .legal-wrap h2{
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+      margin:2rem 0 0.75rem;color:var(--yellow);
+    }
+    .legal-wrap p{color:var(--text-muted);margin-bottom:0.6rem;font-size:0.95rem}
+    .legal-wrap a{color:var(--yellow);text-decoration:none}
+    .legal-wrap a:hover{text-decoration:underline}
+    .legal-note{
+      margin-top:3rem;padding:1rem 1.2rem;border-radius:10px;
+      background:var(--gray);border:1px solid rgba(245,200,66,0.25);
+      font-size:0.82rem;color:var(--text-muted);
+    }
+  </style>
+
+  <header class="legal-header">
+    <a href="/" class="legal-logo">⚡ Elektro <span>Stebel</span></a>
+    <a href="/" class="legal-back">← Zurück zur Startseite</a>
+  </header>
+
+  <main class="legal-wrap">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>{business.legalName}</p>
+    <p>{business.address.street}</p>
+    <p>{business.address.zip} {business.address.city}</p>
+
+    <h2>Vertreten durch</h2>
+    <p>{business.legal.vertretungsberechtigt}</p>
+
+    <h2>Kontakt</h2>
+    <p>Telefon: {business.phone}</p>
+    <p>E-Mail: {business.email}</p>
+
+    <h2>Registereintrag</h2>
+    <p>{business.legal.register}</p>
+
+    <h2>Umsatzsteuer-ID</h2>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: {business.legal.ustId}</p>
+
+    <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
+    <p>Berufsbezeichnung: {business.legal.berufsbezeichnung}</p>
+    <p>Zuständige Kammer: {business.legal.handwerkskammer}</p>
+    <p>Es gelten die Vorschriften der Handwerksordnung (HwO).</p>
+
+    <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+    <p>Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+
+    <div class="legal-note">
+      Hinweis: Diese Seite ist ein Akquise-Demoprojekt. Adresse, Registernummer und USt-IdNr in diesem Impressum sind Platzhalterangaben und keine echten Geschäftsdaten.
+    </div>
+  </main>
+</Layout>
