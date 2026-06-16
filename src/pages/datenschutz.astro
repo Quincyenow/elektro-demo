@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../data/business.ts';
+---
+
+<Layout
+  title={`Datenschutzerklärung – ${business.name}`}
+  description={`Datenschutzerklärung von ${business.name} gemäß DSGVO.`}
+  canonicalPath="/datenschutz/"
+>
+  <style>
+    .legal-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.2rem 2rem;max-width:800px;margin:0 auto;
+    }
+    .legal-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;text-decoration:none;color:var(--white)}
+    .legal-logo span{color:var(--yellow)}
+    .legal-back{font-size:0.85rem;color:var(--text-muted);text-decoration:none}
+    .legal-back:hover{color:var(--white)}
+    .legal-wrap{max-width:800px;margin:0 auto;padding:2rem 2rem 5rem}
+    .legal-wrap h1{
+      font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;
+      letter-spacing:-0.02em;margin-bottom:2rem;
+    }
+    .legal-wrap h2{
+      font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+      margin:2rem 0 0.75rem;color:var(--yellow);
+    }
+    .legal-wrap p, .legal-wrap li{color:var(--text-muted);margin-bottom:0.6rem;font-size:0.95rem}
+    .legal-wrap ul{margin-left:1.2rem;margin-bottom:0.6rem}
+    .legal-wrap a{color:var(--yellow);text-decoration:none}
+    .legal-wrap a:hover{text-decoration:underline}
+  </style>
+
+  <header class="legal-header">
+    <a href="/" class="legal-logo">⚡ Elektro <span>Stebel</span></a>
+    <a href="/" class="legal-back">← Zurück zur Startseite</a>
+  </header>
+
+  <main class="legal-wrap">
+    <h1>Datenschutzerklärung</h1>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>{business.legalName}</p>
+    <p>{business.address.street}, {business.address.zip} {business.address.city}</p>
+    <p>E-Mail: {business.email} · Telefon: {business.phone}</p>
+
+    <h2>2. Hosting</h2>
+    <p>Diese Website wird bei Vercel Inc. gehostet. Beim Aufruf der Seite verarbeitet Vercel automatisch technische Verbindungsdaten in Server-Logs. Diese Verarbeitung ist zur technischen Auslieferung der Seite erforderlich (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+    <h2>3. Schriftarten</h2>
+    <p>Die auf dieser Seite verwendeten Schriftarten (Inter, Syne) werden lokal von unserem eigenen Server bereitgestellt. Es findet keine Verbindung zu Google-Fonts-Servern statt.</p>
+
+    <h2>4. Kontaktformular</h2>
+    <p>Wenn Sie uns über das Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben zwecks Bearbeitung der Anfrage gespeichert. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.</p>
+    <p>Zur Zustellung der E-Mails nutzen wir den Dienst Resend (Resend, Inc.).</p>
+
+    <h2>5. Cookies</h2>
+    <p>Diese Seite verwendet keine Tracking- oder Marketing-Cookies.</p>
+
+    <h2>6. Ihre Rechte</h2>
+    <p>Sie haben jederzeit das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO).</p>
+    <p>Wenden Sie sich dazu an: {business.email}</p>
+  </main>
+</Layout>
