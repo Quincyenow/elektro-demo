@@ -1,23 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { business } from '../data/business.ts';
 ---
 
-<Layout title="Elektro Stebel – Elektromeisterbetrieb in Hannover">
+<Layout
+  title="Elektro Stebel – Elektromeisterbetrieb in Hannover"
+  description="Elektroinstallation, Smart Home, Photovoltaik und Wallbox-Montage in Hannover und Umgebung. 10+ Jahre Erfahrung, 24h Notdienst, kostenlose Beratung."
+  canonicalPath="/"
+>
 
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --yellow:#F5C842;
-    --yellow-dark:#D4A900;
-    --black:#0D0D0D;
-    --gray:#1A1A1A;
-    --gray-mid:#161616;
-    --text-muted:#888;
-    --white:#FFFFFF;
-  }
-  body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);line-height:1.6}
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap');
-
   nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
     display:flex;align-items:center;justify-content:space-between;
@@ -58,6 +51,7 @@ import Layout from '../layouts/Layout.astro';
     font-size:clamp(2.5rem,5vw,4rem);
     line-height:1.05;letter-spacing:-0.03em;
     margin-bottom:1.5rem;
+    overflow-wrap:break-word;
   }
   .hero h1 em{color:var(--yellow);font-style:normal}
   .hero-sub{color:var(--text-muted);font-size:1rem;max-width:420px;margin-bottom:2rem;line-height:1.7}
@@ -169,23 +163,8 @@ import Layout from '../layouts/Layout.astro';
   }
   .contact-detail-text{font-size:0.88rem;color:var(--text-muted)}
   .contact-detail-text strong{color:var(--white);display:block;font-size:0.92rem}
-  .contact-cta p{color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem}
-  .btn-large{
-    display:block;width:100%;
-    background:var(--yellow);color:var(--black);
-    padding:1rem;border-radius:10px;
-    font-weight:700;font-size:1rem;text-align:center;text-decoration:none;
-    transition:background 0.2s,transform 0.15s;margin-bottom:0.75rem;
-  }
-  .btn-large:hover{background:var(--yellow-dark);transform:translateY(-1px)}
-  .btn-large-ghost{
-    display:block;width:100%;
-    border:1px solid rgba(255,255,255,0.12);color:var(--white);
-    padding:1rem;border-radius:10px;
-    font-size:0.9rem;text-align:center;text-decoration:none;
-    transition:border-color 0.2s;
-  }
-  .btn-large-ghost:hover{border-color:rgba(255,255,255,0.3)}
+  .contact-quick{display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap}
+  .contact-quick .btn-ghost{flex:1;text-align:center}
 
   footer{
     border-top:1px solid rgba(255,255,255,0.06);
@@ -210,9 +189,6 @@ import Layout from '../layouts/Layout.astro';
     footer{flex-direction:column;gap:1rem;text-align:center}
   }
 </style>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
 <nav>
   <div class="nav-logo">⚡ Elektro <span>Stebel</span></div>
@@ -257,14 +233,14 @@ import Layout from '../layouts/Layout.astro';
 <div class="ticker-wrap">
   <div class="ticker">
     <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">0511 – 123 456 78 <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
     <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">info@elektrostebel.de <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
     <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
     <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">0511 – 123 456 78 <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
     <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">info@elektrostebel.de <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
     <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
   </div>
 </div>
@@ -349,34 +325,36 @@ import Layout from '../layouts/Layout.astro';
   <p class="section-sub">24 Stunden täglich für Sie erreichbar.</p>
   <div class="contact-wrap">
     <div class="contact-info">
-      <p>Wir sind Ihr zuverlässiger Partner für alle Elektroarbeiten in Hannover und Umgebung. Kontaktieren Sie uns – wir melden uns schnell zurück.</p>
+      <p>Wir sind Ihr zuverlässiger Partner für alle Elektroarbeiten in Hannover und Umgebung. Füllen Sie das Formular aus – wir melden uns innerhalb von 24h zurück.</p>
       <div class="contact-detail">
         <div class="contact-detail-icon">📞</div>
-        <div class="contact-detail-text"><strong>0511 – 123 456 78</strong>Mo–So, 24h erreichbar</div>
+        <div class="contact-detail-text"><strong>{business.phone}</strong>Mo–So, 24h erreichbar</div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">✉️</div>
-        <div class="contact-detail-text"><strong>info@elektrostebel.de</strong>Antwort innerhalb 24h</div>
+        <div class="contact-detail-text"><strong>{business.email}</strong>Antwort innerhalb 24h</div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">📍</div>
         <div class="contact-detail-text"><strong>Hannover & Umgebung</strong>Einsatzgebiet Region Hannover</div>
       </div>
+      <div class="contact-quick">
+        <a href={`tel:${business.phoneHref}`} class="btn-ghost">📞 Jetzt anrufen</a>
+        <a href={`mailto:${business.email}`} class="btn-ghost">✉️ E-Mail schreiben</a>
+      </div>
     </div>
     <div class="contact-cta">
-      <p>Bereit für Ihr Projekt? Rufen Sie uns an oder schreiben Sie uns.</p>
-      <a href="tel:+4951112345678" class="btn-large">📞 Jetzt anrufen</a>
-      <a href="mailto:info@elektrostebel.de" class="btn-large-ghost">✉️ E-Mail schreiben</a>
+      <ContactForm />
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-logo">⚡ Elektro <span>Stebel</span></div>
-  <div class="footer-copy">© 2025 Elektro Stebel | Hannover</div>
+  <div class="footer-copy">© {new Date().getFullYear()} {business.name} | {business.address.city}</div>
   <div class="footer-links">
-    <a href="#">Impressum</a>
-    <a href="#">Datenschutz</a>
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
   </div>
 </footer>
 
