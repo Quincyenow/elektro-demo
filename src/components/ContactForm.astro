@@ -1,0 +1,116 @@
+---
+import { services } from '../data/services.ts';
+---
+
+<div class="contact-form-wrap" id="contact-form-wrap">
+  <form id="contact-form" novalidate>
+    <div class="form-row">
+      <label for="cf-name">Name *</label>
+      <input id="cf-name" name="name" type="text" required autocomplete="name" />
+    </div>
+
+    <div class="form-row form-row-split">
+      <div>
+        <label for="cf-phone">Telefon</label>
+        <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+      </div>
+      <div>
+        <label for="cf-email">E-Mail *</label>
+        <input id="cf-email" name="email" type="email" required autocomplete="email" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label for="cf-service">Worum geht's?</label>
+      <select id="cf-service" name="service">
+        <option value="">Bitte auswählen (optional)</option>
+        {services.map((s) => <option value={s.name}>{s.name}</option>)}
+        <option value="Sonstiges">Sonstiges</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="cf-message">Nachricht *</label>
+      <textarea id="cf-message" name="message" rows="4" required placeholder="Kurz beschreiben, worum es geht..."></textarea>
+    </div>
+
+    <button type="submit" class="btn-large" id="cf-submit">Anfrage senden</button>
+    <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<style>
+  .contact-form-wrap{width:100%}
+  .form-row{margin-bottom:1rem}
+  .form-row-split{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  label{display:block;font-size:0.82rem;color:var(--text-muted);margin-bottom:0.4rem}
+  input,select,textarea{
+    width:100%;background:var(--gray-mid);border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px;padding:0.7rem 0.9rem;color:var(--white);font-size:0.92rem;
+    font-family:inherit;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--yellow);border-color:var(--yellow)}
+  textarea{resize:vertical}
+  .btn-large{
+    display:block;width:100%;background:var(--yellow);color:var(--black);
+    border:none;cursor:pointer;
+    padding:1rem;border-radius:10px;font-weight:700;font-size:1rem;
+    transition:background 0.2s,transform 0.15s;
+  }
+  .btn-large:hover{background:var(--yellow-dark);transform:translateY(-1px)}
+  .btn-large:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  .form-status{margin-top:0.8rem;font-size:0.85rem;min-height:1.2em}
+  .form-status.success{color:#7CCB7C}
+  .form-status.error{color:#E27D7D}
+
+  @media(max-width:768px){
+    .form-row-split{grid-template-columns:1fr}
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('cf-status');
+  const submitBtn = document.getElementById('cf-submit') as HTMLButtonElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status || !submitBtn) return;
+
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get('name') || ''),
+      phone: String(formData.get('phone') || ''),
+      email: String(formData.get('email') || ''),
+      service: String(formData.get('service') || ''),
+      message: String(formData.get('message') || ''),
+    };
+
+    submitBtn.disabled = true;
+    status.textContent = 'Wird gesendet...';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+
+      if (res.ok && result.ok) {
+        status.textContent = 'Danke! Wir melden uns innerhalb von 24h bei Ihnen.';
+        status.className = 'form-status success';
+        form.reset();
+      } else {
+        status.textContent = result.error || 'Da ist etwas schiefgelaufen. Bitte ruf uns direkt an.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Da ist etwas schiefgelaufen. Bitte ruf uns direkt an.';
+      status.className = 'form-status error';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
