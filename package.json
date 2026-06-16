@@ -1,19 +1,61 @@
-{
-  "name": "elektro-demo",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
+// Zentrale Geschäftsdaten — überall sonst im Code wird von hier importiert,
+// statt Telefonnummer/Adresse mehrfach hart zu codieren.
+//
+// HINWEIS: Elektro Stebel ist ein Demo-/Akquise-Projekt, keine reale Firma.
+// Adresse, HRB-Nummer und USt-IdNr unten sind Platzhalter. Sobald diese Seite
+// für einen echten Kunden läuft, MÜSSEN diese Werte durch echte Daten ersetzt
+// werden — vor allem im Impressum (§5 TMG-Pflichtangaben).
+
+export const business = {
+  name: 'Elektro Stebel',
+  legalName: 'Elektro Stebel GmbH',
+  tagline: 'Elektromeisterbetrieb Hannover',
+
+  phone: '0511 – 123 456 78',
+  phoneHref: '+4951112345678',
+  email: 'info@elektrostebel.de',
+  whatsapp: '4951112345678', // ohne +, ohne Leerzeichen, für wa.me Links
+
+  address: {
+    street: 'Musterstraße 12',
+    zip: '30159',
+    city: 'Hannover',
+    region: 'Niedersachsen',
+    country: 'DE',
   },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+
+  areaServed: ['Hannover', 'Langenhagen', 'Garbsen', 'Laatzen', 'Burgwedel'],
+
+  openingHours: {
+    display: 'Mo–So, 24h erreichbar (Notdienst)',
+    // Schema.org Format: https://schema.org/openingHours
+    schema: 'Mo-Su 00:00-23:59',
   },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.3.1",
-    "astro": "^6.4.6",
-    "tailwindcss": "^4.3.1"
-  }
-}
+
+  founded: '2014',
+  stats: {
+    yearsExperience: '10+',
+    projectsCompleted: '500+',
+    availability: '24h',
+    satisfaction: '100%',
+  },
+
+  social: {
+    // noch nicht vorhanden — Platzhalter für später
+    instagram: '',
+    facebook: '',
+    googleMapsUrl: 'https://maps.google.com/?q=Elektro+Stebel+Hannover',
+    googleReviewUrl: '', // direkter "Bewertung schreiben"-Link, sobald Google-Profil existiert
+  },
+
+  legal: {
+    // Platzhalterdaten — siehe Hinweis oben
+    vertretungsberechtigt: 'Max Stebel, Geschäftsführer',
+    handwerkskammer: 'Handwerkskammer Hannover, Mitglieds-Nr. HWK-DEMO-00000',
+    berufsbezeichnung: 'Elektrotechnikermeister (verliehen in Deutschland)',
+    register: 'Amtsgericht Hannover, HRB DEMO00000',
+    ustId: 'DE000000000',
+  },
+} as const;
+
+export type Business = typeof business;
