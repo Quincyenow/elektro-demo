@@ -43,49 +43,51 @@
 
   /* ---- SAFE ZONE: 1546 x 423 zentriert (auf allen Geräten sichtbar) ---- */
   .safe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-    width:1546px;height:423px;
-    display:grid;grid-template-columns:430px 1fr 600px;align-items:center;gap:50px;z-index:3}
+    width:1330px;height:423px;
+    display:grid;grid-template-columns:350px 1fr 460px;align-items:center;gap:44px;z-index:3}
 
   /* ---------- LINKS: freigestelltes Foto (frei positioniert) ---------- */
-  .portrait{position:absolute;left:452px;bottom:96px;width:520px;height:760px;z-index:2}
-  .portrait .pglow{position:absolute;left:50%;top:300px;transform:translate(-50%,-50%);
-    width:600px;height:600px;border-radius:50%;
+  .portrait{position:absolute;left:606px;bottom:166px;width:470px;height:640px;z-index:2}
+  .portrait .pglow{position:absolute;left:50%;top:238px;transform:translate(-50%,-50%);
+    width:520px;height:520px;border-radius:50%;
     background:radial-gradient(circle, rgba(232,200,119,.34), rgba(232,200,119,.10) 40%, transparent 64%);
     filter:blur(14px)}
   .portrait img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-    height:760px;width:auto;object-fit:contain;object-position:bottom;
-    filter:drop-shadow(0 24px 42px rgba(0,0,0,.6))}
+    height:640px;width:auto;object-fit:contain;object-position:bottom;
+    filter:drop-shadow(0 20px 34px rgba(0,0,0,.55));
+    -webkit-mask:linear-gradient(to bottom,#000 80%,transparent 100%);
+            mask:linear-gradient(to bottom,#000 80%,transparent 100%)}
   /* Fallback-Platzhalter, falls kein Foto */
   .noimg{position:absolute;inset:0;display:none}
 
   /* ---------- MITTE: Name + Rolle ---------- */
-  .center{display:flex;flex-direction:column;justify-content:center;gap:18px}
-  .kicker{font-size:21px;letter-spacing:.44em;text-transform:uppercase;color:var(--gold);
-    font-weight:700;padding-left:5px}
-  .name{font-size:138px;line-height:.9;font-weight:800;letter-spacing:.01em;
+  .center{display:flex;flex-direction:column;justify-content:center;gap:13px}
+  .kicker{font-size:17px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);
+    font-weight:700;padding-left:4px}
+  .name{font-size:108px;line-height:.9;font-weight:800;letter-spacing:.01em;
     background:linear-gradient(180deg,#FFFFFF 0%, #EAF0FB 45%, #C9D6F0 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
     text-shadow:0 4px 60px rgba(232,200,119,.12)}
-  .role{display:flex;align-items:center;gap:18px;margin-top:6px}
-  .role .bar{width:70px;height:4px;border-radius:4px;
+  .role{display:flex;align-items:center;gap:14px;margin-top:4px}
+  .role .bar{width:54px;height:4px;border-radius:4px;
     background:linear-gradient(90deg,var(--gold2),var(--gold))}
-  .role .txt{font-size:40px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);font-weight:700}
+  .role .txt{font-size:31px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);font-weight:700}
 
   /* ---------- RECHTS: Slogan ---------- */
-  .slogan{position:relative;padding-left:38px;border-left:3px solid rgba(232,200,119,.6)}
-  .quote{position:absolute;left:20px;top:-42px;font-size:120px;line-height:1;
+  .slogan{position:relative;padding-left:30px;border-left:3px solid rgba(232,200,119,.6)}
+  .quote{position:absolute;left:16px;top:-34px;font-size:92px;line-height:1;
     color:rgba(232,200,119,.28);font-weight:800;font-family:Georgia,serif}
-  .slogan .l1{font-size:58px;font-weight:800;line-height:1.06;color:var(--ink)}
-  .slogan .l2{font-size:58px;font-weight:800;line-height:1.06;
+  .slogan .l1{font-size:45px;font-weight:800;line-height:1.06;color:var(--ink)}
+  .slogan .l2{font-size:45px;font-weight:800;line-height:1.06;
     background:linear-gradient(90deg,var(--gold2),var(--gold));
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .slogan .sub{margin-top:22px;font-size:23px;letter-spacing:.05em;color:var(--muted)}
+  .slogan .sub{margin-top:16px;font-size:19px;letter-spacing:.05em;color:var(--muted)}
 
   /* dekorative Randzeilen außerhalb der Safe-Zone */
-  .footer{position:absolute;left:130px;bottom:96px;font-size:22px;letter-spacing:.3em;
-    text-transform:uppercase;color:rgba(174,183,204,.6);font-weight:600;z-index:3}
-  .footer2{position:absolute;right:130px;bottom:96px;font-size:22px;letter-spacing:.14em;
-    color:rgba(232,200,119,.7);font-weight:700;z-index:3}
+  .footer{position:absolute;left:130px;bottom:70px;font-size:19px;letter-spacing:.3em;
+    text-transform:uppercase;color:rgba(174,183,204,.55);font-weight:600;z-index:3}
+  .footer2{position:absolute;right:130px;bottom:70px;font-size:19px;letter-spacing:.14em;
+    color:rgba(232,200,119,.65);font-weight:700;z-index:3}
 </style>
 </head>
 <body>
