@@ -1,0 +1,56 @@
+---
+import '../styles/coach.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/syne/700.css';
+import '@fontsource/syne/800.css';
+
+import { coach } from '../data/coach.ts';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title = `${coach.name} – ${coach.role} | ${coach.claim}`,
+  description = 'Psychologisch fundiertes Dating-Coaching mit Dr. Quincy: Kennenlernen, Anziehung und echte Beziehungen – klar erklärt, sofort anwendbar.',
+  canonicalPath = '/',
+} = Astro.props;
+
+const canonicalURL = Astro.site ? new URL(canonicalPath, Astro.site) : canonicalPath;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: coach.name,
+  jobTitle: coach.role,
+  description: coach.claim,
+  email: coach.email,
+  telephone: coach.phoneHref,
+  url: Astro.site?.toString(),
+};
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#050b1c" />
+    <set:html value={`<script type="application/ld+json">${JSON.stringify(schema)}</script>`} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
