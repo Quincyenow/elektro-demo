@@ -44,31 +44,19 @@
   /* ---- SAFE ZONE: 1546 x 423 zentriert (auf allen Geräten sichtbar) ---- */
   .safe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
     width:1546px;height:423px;
-    display:grid;grid-template-columns:380px 1fr 600px;align-items:center;gap:50px;z-index:3}
+    display:grid;grid-template-columns:430px 1fr 600px;align-items:center;gap:50px;z-index:3}
 
-  /* ---------- LINKS: freigestelltes Foto ---------- */
-  .photo{position:relative;width:380px;height:400px;justify-self:center}
-  .photo .halo{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
-    width:360px;height:360px;border-radius:50%;
-    background:radial-gradient(circle, rgba(232,200,119,.28), transparent 62%);filter:blur(6px)}
-  .photo .arc{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
-    width:344px;height:344px;border-radius:50%;
-    background:conic-gradient(from 160deg, var(--gold2), var(--gold), transparent 55%, var(--gold));
-    -webkit-mask:radial-gradient(circle,transparent 165px,#000 167px);
-            mask:radial-gradient(circle,transparent 165px,#000 167px)}
-  /* echtes Foto, falls design/foto.png vorhanden – sonst Platzhalter darunter */
-  .photo .real{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-    width:380px;height:400px;object-fit:contain;object-position:bottom;z-index:2;
-    filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
-  .photo .ph{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
-    width:312px;height:312px;border-radius:50%;overflow:hidden;
-    background:radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.08), transparent 55%), #0c1c3d;
-    border:2px dashed rgba(232,200,119,.55);display:flex;align-items:flex-end;justify-content:center}
-  .photo .ph svg{width:230px;height:230px;opacity:.8;transform:translateX(8px)}
-  .photo .tag{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);z-index:4;
-    background:rgba(5,11,28,.9);border:1px solid rgba(232,200,119,.5);color:var(--gold);
-    font-size:16px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
-    padding:7px 15px;border-radius:999px;white-space:nowrap}
+  /* ---------- LINKS: freigestelltes Foto (frei positioniert) ---------- */
+  .portrait{position:absolute;left:452px;bottom:96px;width:520px;height:760px;z-index:2}
+  .portrait .pglow{position:absolute;left:50%;top:300px;transform:translate(-50%,-50%);
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(232,200,119,.34), rgba(232,200,119,.10) 40%, transparent 64%);
+    filter:blur(14px)}
+  .portrait img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    height:760px;width:auto;object-fit:contain;object-position:bottom;
+    filter:drop-shadow(0 24px 42px rgba(0,0,0,.6))}
+  /* Fallback-Platzhalter, falls kein Foto */
+  .noimg{position:absolute;inset:0;display:none}
 
   /* ---------- MITTE: Name + Rolle ---------- */
   .center{display:flex;flex-direction:column;justify-content:center;gap:18px}
@@ -105,24 +93,14 @@
   <div class="glow"></div>
   <div class="vign"></div>
 
+  <!-- LINKS: freigestelltes Foto, Blick nach rechts (zur Mitte) -->
+  <div class="portrait">
+    <div class="pglow"></div>
+    <img src="foto_cut.png" alt="Dr. Quincy">
+  </div>
+
   <div class="safe">
-    <!-- LINKS: freigestelltes Foto, Blick nach rechts -->
-    <div class="photo">
-      <div class="halo"></div>
-      <div class="arc"></div>
-      <div class="ph">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <g fill="rgba(232,200,119,.72)">
-            <path d="M118 66c0 22-16 40-36 40s-36-18-36-40 16-40 36-40c14 0 26 8 32 20 3 6 4 13 4 20z"/>
-            <path d="M30 200c0-40 28-70 64-70s64 30 64 70z"/>
-          </g>
-          <path d="M150 88 l20 12 -20 12" fill="none" stroke="rgba(246,228,176,.95)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <!-- Wenn design/foto.png existiert, wird es hier eingeblendet und verdeckt den Platzhalter -->
-      <img class="real" src="foto.png" alt="" onerror="this.style.display='none'">
-      <div class="tag">Dein Foto · Blick nach rechts →</div>
-    </div>
+    <div></div><!-- Spalte 1: Platz fuer Portrait -->
 
     <!-- MITTE: Name + Rolle -->
     <div class="center">
