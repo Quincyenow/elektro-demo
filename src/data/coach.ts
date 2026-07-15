@@ -79,9 +79,9 @@ export const coach = {
   appsTitle: 'Dating-Apps im Test',
   appsSub: 'Die besten Apps, um die richtige Partnerin zu finden',
   apps: [
-    { rank: 1, name: 'Parship', winner: true,  rating: 4.5, color: '#1f6f6f', text: 'Seriöse Partnervermittlung mit wissenschaftlichem Matching – ideal für alle, die eine feste Beziehung suchen.' },
-    { rank: 2, name: 'Bumble', winner: false, rating: 4.0, color: '#f2b500', text: 'Frauen machen den ersten Schritt. Frischer Ansatz, der Druck rausnimmt und für Qualität sorgt.' },
-    { rank: 3, name: 'ElitePartner', winner: false, rating: 3.5, color: '#20406b', text: 'Gehobene Plattform mit hohem Akademiker-Anteil – für Singles, die es ernst meinen.' },
+    { rank: 1, name: 'Parship', winner: true,  rating: 4.5, question: 'Funktioniert seriöses Matching wirklich?', text: 'Seriöse Partnervermittlung mit wissenschaftlichem Matching – ideal für alle, die eine feste Beziehung suchen.' },
+    { rank: 2, name: 'Bumble', winner: false, rating: 4.0, question: 'Frauen machen den ersten Schritt – lohnt sich das?', text: 'Frischer Ansatz, der Druck rausnimmt und für Qualität sorgt. Ideal für selbstbewusste Singles.' },
+    { rank: 3, name: 'ElitePartner', winner: false, rating: 3.5, question: 'Die richtige Wahl für Akademiker-Singles?', text: 'Gehobene Plattform mit hohem Akademiker-Anteil – für Singles, die es ernst meinen.' },
   ],
 
   // Artikel

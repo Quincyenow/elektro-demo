@@ -86,7 +86,7 @@ const stars = (r: number) => Array.from({ length: 5 }, (_, i) => (i < Math.round
             <div class="q">&ldquo;</div>
             <p>{t.quote}</p>
             <div class="who">
-              <span class="avatar">{initials(t.name)}</span>
+              <img src={coach.about.photo} alt={t.name} />
               <span><b>{t.name}</b><span>{t.role}</span></span>
             </div>
           </div>
@@ -125,10 +125,13 @@ const stars = (r: number) => Array.from({ length: 5 }, (_, i) => (i < Math.round
       <div class="apps-grid">
         {coach.apps.map((a) => (
           <div class="acard">
-            <div class="head" style={`background:linear-gradient(135deg, ${a.color}, #0b1c3f)`}>
+            <div class="head">
               <span class="rank">{a.rank}</span>
               {a.winner && <span class="winner">Testsieger</span>}
-              <span style="font-family:'Syne';font-weight:800;font-size:28px;opacity:.9">{a.name}</span>
+              <span class="logo-box">{a.name}</span>
+              <span class="test">Test</span>
+              <span class="qsub">{a.question}</span>
+              <img class="model" src={coach.hero.image} alt="" />
             </div>
             <div class="appname">{a.name}</div>
             <div class="body">
@@ -152,7 +155,7 @@ const stars = (r: number) => Array.from({ length: 5 }, (_, i) => (i < Math.round
       <div class="art-grid">
         {coach.popular.map((a) => (
           <article class="article">
-            <div class="thumb"><span class="cat">{a.cat}</span></div>
+            <div class="thumb" style={`background-image:url(${coach.about.photo})`}><span class="cat">{a.cat}</span></div>
             <div class="txt">
               <h3>{a.title}</h3>
               <p>{a.excerpt}</p>
@@ -165,13 +168,13 @@ const stars = (r: number) => Array.from({ length: 5 }, (_, i) => (i < Math.round
   </section>
 
   <!-- ===================== NEWEST ARTICLES ===================== -->
-  <section class="section articles" style="background:var(--navy-2)">
+  <section class="section articles alt">
     <div class="wrap">
       <div class="sec-head"><h2>{coach.newestTitle}</h2></div>
       <div class="art-grid four">
         {coach.newest.map((a) => (
           <article class="article">
-            <div class="thumb"><span class="cat">{a.cat}</span></div>
+            <div class="thumb" style={`background-image:url(${coach.about.photo})`}><span class="cat">{a.cat}</span></div>
             <div class="txt">
               <h3>{a.title}</h3>
               <p>{a.excerpt}</p>
