@@ -241,12 +241,20 @@
       </div>
 
       <div class="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-2 shadow-2xl sm:p-3">
-        <!-- ===== Calendly Inline-Widget ===== -->
+        <!-- ===== Calendly Inline-Widget (lädt erst nach Einwilligung, DSGVO) ===== -->
         <!-- TODO: Ersetze DEIN_CALENDLY_LINK durch deinen echten Calendly-Link -->
-        <div class="calendly-inline-widget"
-             data-url="https://calendly.com/DEIN_CALENDLY_LINK?hide_gdpr_banner=1&background_color=0f172a&text_color=e2e8f0&primary_color=f59e0b"
-             style="min-width:280px;height:720px;"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <div id="calendly-container"
+             data-url="https://calendly.com/DEIN_CALENDLY_LINK?hide_gdpr_banner=1&background_color=0f172a&text_color=e2e8f0&primary_color=f59e0b">
+          <!-- Platzhalter, solange keine Einwilligung vorliegt -->
+          <div id="calendly-placeholder" class="flex min-h-[420px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-white/15 bg-slate-800/40 p-8 text-center">
+            <i class="fa-solid fa-calendar-lock text-3xl text-indigo-400"></i>
+            <p class="max-w-md text-slate-300">Aus Datenschutzgründen wird der Terminkalender (Calendly) erst nach deiner Zustimmung geladen. Dabei werden Daten an Calendly&nbsp;LLC (USA) übertragen.</p>
+            <button type="button" id="calendly-load-btn" class="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-amber-400">
+              <i class="fa-solid fa-unlock"></i> Kalender laden &amp; Termin wählen
+            </button>
+            <a href="datenschutz.html" class="text-xs text-slate-500 underline hover:text-amber-400">Mehr in der Datenschutzerklärung</a>
+          </div>
+        </div>
         <!-- ===== /Calendly ===== -->
       </div>
       <p class="mt-4 text-center text-sm text-slate-500">Falls der Kalender nicht lädt: Werbeblocker kurz deaktivieren oder Seite neu laden.</p>
@@ -279,6 +287,69 @@
     </a>
   </div>
   <div class="h-20 sm:hidden"></div>
+
+  <!-- ============ DSGVO Consent-Banner ============ -->
+  <div id="consent-banner" class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-white/10 bg-slate-950/95 p-4 backdrop-blur">
+    <div class="mx-auto flex max-w-4xl flex-col items-center gap-4 sm:flex-row">
+      <p class="text-sm leading-relaxed text-slate-300">
+        <i class="fa-solid fa-cookie-bite mr-1.5 text-amber-400"></i>
+        Diese Seite lädt für die Terminbuchung den externen Dienst <strong class="text-white">Calendly</strong> (USA). Er wird erst geladen, wenn du zustimmst. Mehr dazu in der
+        <a href="datenschutz.html" class="underline hover:text-amber-400">Datenschutzerklärung</a>.
+      </p>
+      <div class="flex w-full flex-none gap-2 sm:w-auto">
+        <button type="button" id="consent-decline" class="flex-1 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/5 sm:flex-none">Nur notwendige</button>
+        <button type="button" id="consent-accept" class="flex-1 rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-amber-400 sm:flex-none">Akzeptieren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Consent- & Calendly-Logik ============ -->
+  <script>
+    (function () {
+      var container = document.getElementById('calendly-container');
+      var banner = document.getElementById('consent-banner');
+      var CAL_URL = container ? container.getAttribute('data-url') : '';
+
+      function loadCalendly() {
+        if (!container || container.getAttribute('data-loaded')) return;
+        container.setAttribute('data-loaded', '1');
+        container.innerHTML = '<div class="calendly-inline-widget" data-url="' + CAL_URL + '" style="min-width:280px;height:720px;"></div>';
+        var s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }
+
+      function hideBanner() { if (banner) banner.classList.add('hidden'); }
+
+      var consent = null;
+      try { consent = localStorage.getItem('fp_consent'); } catch (e) {}
+
+      if (consent === 'accepted') {
+        loadCalendly();
+      } else if (consent !== 'declined') {
+        if (banner) banner.classList.remove('hidden');
+      }
+
+      var accept = document.getElementById('consent-accept');
+      var decline = document.getElementById('consent-decline');
+      var loadBtn = document.getElementById('calendly-load-btn');
+
+      if (accept) accept.addEventListener('click', function () {
+        try { localStorage.setItem('fp_consent', 'accepted'); } catch (e) {}
+        hideBanner(); loadCalendly();
+      });
+      if (decline) decline.addEventListener('click', function () {
+        try { localStorage.setItem('fp_consent', 'declined'); } catch (e) {}
+        hideBanner();
+      });
+      // Direkter Klick auf den Kalender-Button gilt ebenfalls als Einwilligung
+      if (loadBtn) loadBtn.addEventListener('click', function () {
+        try { localStorage.setItem('fp_consent', 'accepted'); } catch (e) {}
+        hideBanner(); loadCalendly();
+      });
+    })();
+  </script>
 
 </body>
 </html>
