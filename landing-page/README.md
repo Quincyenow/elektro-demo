@@ -9,7 +9,7 @@ Serverless-Funktion (`api/subscribe.js`) für die Newsletter-Anmeldung.
 Dieser Ordner ist **noch nicht automatisch live**. Um ihn unter einer eigenen
 URL erreichbar zu machen:
 
-1. Neues Vercel-Projekt anlegen, **Root Directory** auf `Landing Page` setzen.
+1. Neues Vercel-Projekt anlegen, **Root Directory** auf `landing-page` setzen.
 2. Unter Project Settings → Environment Variables setzen:
    - `RESEND_API_KEY` – API-Key von [resend.com](https://resend.com)
    - `LEAD_NOTIFICATION_EMAIL` – Adresse, an die neue Anmeldungen gemeldet werden
