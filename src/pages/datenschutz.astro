@@ -13,10 +13,10 @@ import { business } from '../data/business.ts';
       display:flex;align-items:center;justify-content:space-between;
       padding:1.2rem 2rem;max-width:800px;margin:0 auto;
     }
-    .legal-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;text-decoration:none;color:var(--white)}
-    .legal-logo span{color:var(--yellow)}
+    .legal-logo{display:flex;align-items:center;text-decoration:none}
+    .legal-logo img{height:28px;width:auto;display:block}
     .legal-back{font-size:0.85rem;color:var(--text-muted);text-decoration:none}
-    .legal-back:hover{color:var(--white)}
+    .legal-back:hover{color:var(--black)}
     .legal-wrap{max-width:800px;margin:0 auto;padding:2rem 2rem 5rem}
     .legal-wrap h1{
       font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;
@@ -24,16 +24,16 @@ import { business } from '../data/business.ts';
     }
     .legal-wrap h2{
       font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
-      margin:2rem 0 0.75rem;color:var(--yellow);
+      margin:2rem 0 0.75rem;color:var(--red);
     }
     .legal-wrap p, .legal-wrap li{color:var(--text-muted);margin-bottom:0.6rem;font-size:0.95rem}
     .legal-wrap ul{margin-left:1.2rem;margin-bottom:0.6rem}
-    .legal-wrap a{color:var(--yellow);text-decoration:none}
+    .legal-wrap a{color:var(--red);text-decoration:none}
     .legal-wrap a:hover{text-decoration:underline}
   </style>
 
   <header class="legal-header">
-    <a href="/" class="legal-logo">⚡ Elektro <span>Stebel</span></a>
+    <a href="/" class="legal-logo"><img src="/logo.svg" alt="Flirt Psychologie" /></a>
     <a href="/" class="legal-back">← Zurück zur Startseite</a>
   </header>
 

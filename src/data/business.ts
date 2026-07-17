@@ -1,56 +1,54 @@
 // Zentrale Geschäftsdaten — überall sonst im Code wird von hier importiert,
 // statt Telefonnummer/Adresse mehrfach hart zu codieren.
 //
-// HINWEIS: Elektro Stebel ist ein Demo-/Akquise-Projekt, keine reale Firma.
+// HINWEIS: Flirt Psychologie ist ein Demo-/Akquise-Projekt, keine reale Firma.
 // Adresse, HRB-Nummer und USt-IdNr unten sind Platzhalter. Sobald diese Seite
 // für einen echten Kunden läuft, MÜSSEN diese Werte durch echte Daten ersetzt
 // werden — vor allem im Impressum (§5 TMG-Pflichtangaben).
 
 export const business = {
-  name: 'Elektro Stebel',
-  legalName: 'Elektro Stebel GmbH',
-  tagline: 'Elektromeisterbetrieb Hannover',
+  name: 'Flirt Psychologie',
+  legalName: 'Flirt Psychologie GmbH',
+  tagline: 'Beziehungscoaching & Flirtseminare',
 
-  phone: '0511 – 123 456 78',
-  phoneHref: '+4951112345678',
-  email: 'info@elektrostebel.de',
-  whatsapp: '4951112345678',
+  phone: '030 – 123 456 78',
+  phoneHref: '+493012345678',
+  email: 'info@flirt-psychologie.de',
+  whatsapp: '493012345678',
 
   address: {
     street: 'Musterstraße 12',
-    zip: '30159',
-    city: 'Hannover',
-    region: 'Niedersachsen',
+    zip: '10115',
+    city: 'Berlin',
+    region: 'Berlin',
     country: 'DE',
   },
 
-  areaServed: ['Hannover', 'Langenhagen', 'Garbsen', 'Laatzen', 'Burgwedel'],
+  areaServed: ['Berlin', 'Deutschland (online)', 'Hamburg', 'München', 'Köln'],
 
   openingHours: {
-    display: 'Mo–So, 24h erreichbar (Notdienst)',
-    schema: 'Mo-Su 00:00-23:59',
+    display: 'Mo–Sa, 9–20 Uhr (nach Terminvereinbarung)',
+    schema: 'Mo-Sa 09:00-20:00',
   },
 
-  founded: '2014',
+  founded: '2016',
   stats: {
-    yearsExperience: '10+',
-    projectsCompleted: '500+',
-    availability: '24h',
-    satisfaction: '100%',
+    yearsExperience: '9+',
+    projectsCompleted: '1200+',
+    availability: 'Online',
+    satisfaction: '98%',
   },
 
   social: {
     instagram: '',
     facebook: '',
-    googleMapsUrl: 'https://maps.google.com/?q=Elektro+Stebel+Hannover',
+    googleMapsUrl: 'https://maps.google.com/?q=Flirt+Psychologie+Berlin',
     googleReviewUrl: '',
   },
 
   legal: {
-    vertretungsberechtigt: 'Max Stebel, Geschäftsführer',
-    handwerkskammer: 'Handwerkskammer Hannover, Mitglieds-Nr. HWK-DEMO-00000',
-    berufsbezeichnung: 'Elektrotechnikermeister (verliehen in Deutschland)',
-    register: 'Amtsgericht Hannover, HRB DEMO00000',
+    vertretungsberechtigt: 'Dr. Anna Voss, Geschäftsführerin',
+    register: 'Amtsgericht Berlin (Charlottenburg), HRB DEMO00000',
     ustId: 'DE000000000',
   },
 } as const;

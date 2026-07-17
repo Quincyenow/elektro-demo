@@ -1,100 +1,102 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { services } from '../data/services.ts';
 import { business } from '../data/business.ts';
 ---
 
 <Layout
-  title="Elektro Stebel – Elektromeisterbetrieb in Hannover"
-  description="Elektroinstallation, Smart Home, Photovoltaik und Wallbox-Montage in Hannover und Umgebung. 10+ Jahre Erfahrung, 24h Notdienst, kostenlose Beratung."
+  title="Flirt Psychologie – Beziehungscoaching & Flirtseminare"
+  description="Flirtcoaching, Kommunikationstraining und Dating-Beratung in Berlin und deutschlandweit online. 9+ Jahre Erfahrung, über 1200 begleitete Coachings, kostenloses Erstgespräch."
   canonicalPath="/"
 >
 
 <style>
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
-  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;text-decoration:none;color:var(--white)}
-  .nav-logo span{color:var(--yellow)}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none}
+  .nav-logo img{height:34px;width:auto;display:block}
   .nav-links{display:flex;gap:2rem;align-items:center}
   .nav-links a{font-size:0.85rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
-  .nav-links a:hover{color:var(--white)}
-  .nav-cta{background:var(--yellow);color:var(--black);padding:0.5rem 1.2rem;border-radius:6px;font-size:0.85rem;font-weight:600;text-decoration:none;transition:background 0.2s;white-space:nowrap}
-  .nav-cta:hover{background:var(--yellow-dark)}
+  .nav-links a:hover{color:var(--black)}
+  .nav-cta{background:var(--red);color:var(--white);padding:0.5rem 1.2rem;border-radius:6px;font-size:0.85rem;font-weight:600;text-decoration:none;transition:background 0.2s;white-space:nowrap}
+  .nav-cta:hover{background:var(--red-dark)}
   .nav-right{display:flex;align-items:center;gap:1rem}
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-  .hamburger span{display:block;width:22px;height:2px;background:var(--white);transition:all 0.3s}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--black);transition:all 0.3s}
   .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .hamburger.open span:nth-child(2){opacity:0}
   .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;z-index:99;background:rgba(13,13,13,0.98);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);flex-direction:column;padding:1.5rem;gap:1rem}
+  .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;z-index:99;background:rgba(255,255,255,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);flex-direction:column;padding:1.5rem;gap:1rem}
   .mobile-menu.open{display:flex}
-  .mobile-menu a{font-size:1rem;color:var(--text-muted);text-decoration:none;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+  .mobile-menu a{font-size:1rem;color:var(--text-muted);text-decoration:none;padding:0.5rem 0;border-bottom:1px solid var(--border)}
   .mobile-menu a:last-child{border-bottom:none}
   .mobile-menu .nav-cta{text-align:center;margin-top:0.5rem;padding:0.8rem;font-size:0.95rem}
   .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 2rem 4rem;gap:3rem;max-width:1200px;margin:0 auto}
-  .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:1.5rem}
-  .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--yellow);flex-shrink:0}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem}
+  .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--red);flex-shrink:0}
   .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.5rem;overflow-wrap:break-word;word-break:break-word}
-  .hero h1 em{color:var(--yellow);font-style:normal}
+  .hero h1 em{color:var(--red);font-style:normal}
   .hero-sub{color:var(--text-muted);font-size:1rem;max-width:420px;margin-bottom:2rem;line-height:1.7}
   .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-  .btn-primary{background:var(--yellow);color:var(--black);padding:0.85rem 1.8rem;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-block}
-  .btn-primary:hover{background:var(--yellow-dark);transform:translateY(-1px)}
-  .btn-ghost{border:1px solid rgba(255,255,255,0.15);padding:0.85rem 1.8rem;border-radius:8px;font-size:0.9rem;color:var(--white);text-decoration:none;transition:border-color 0.2s,background 0.2s;display:inline-block}
-  .btn-ghost:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.04)}
-  .hero-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--gray)}
-  .hero-visual img{width:100%;height:100%;object-fit:cover;opacity:0.85}
-  .hero-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(13,13,13,0.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:1.5rem}
+  .btn-primary{background:var(--red);color:var(--white);padding:0.85rem 1.8rem;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-block}
+  .btn-primary:hover{background:var(--red-dark);transform:translateY(-1px)}
+  .btn-ghost{border:1px solid rgba(0,0,0,0.15);padding:0.85rem 1.8rem;border-radius:8px;font-size:0.9rem;color:var(--black);text-decoration:none;transition:border-color 0.2s,background 0.2s;display:inline-block}
+  .btn-ghost:hover{border-color:rgba(0,0,0,0.35);background:rgba(0,0,0,0.03)}
+  .hero-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%)}
+  .hero-visual-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .hero-visual-icon svg{width:55%;height:55%;opacity:0.9}
+  .hero-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:1.5rem}
   .badge-stat{text-align:center}
-  .badge-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--yellow)}
+  .badge-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--red)}
   .badge-stat-label{font-size:0.65rem;color:var(--text-muted);letter-spacing:0.04em}
-  .ticker-wrap{background:var(--yellow);overflow:hidden;padding:0.65rem 0}
+  .ticker-wrap{background:var(--red);overflow:hidden;padding:0.65rem 0}
   .ticker{display:flex;gap:3rem;white-space:nowrap;animation:tick 22s linear infinite}
   @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .ticker-item{font-size:0.75rem;font-weight:600;color:var(--black);letter-spacing:0.04em;text-transform:uppercase}
-  .ticker-dot{color:rgba(0,0,0,0.3);margin:0 0.5rem}
+  .ticker-item{font-size:0.75rem;font-weight:600;color:var(--white);letter-spacing:0.04em;text-transform:uppercase}
+  .ticker-dot{color:rgba(255,255,255,0.5);margin:0 0.5rem}
   .section{padding:4rem 1.5rem;max-width:1200px;margin:0 auto}
   .section-full{padding:4rem 1.5rem;background:var(--gray-mid)}
   .section-full-inner{max-width:1200px;margin:0 auto}
-  .section-eye{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:0.75rem}
+  .section-eye{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem}
   .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-0.02em;margin-bottom:1rem;overflow-wrap:break-word}
   .section-sub{color:var(--text-muted);max-width:480px;line-height:1.7;margin-bottom:2.5rem}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
   .about-text p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem}
   .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  .stat-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
-  .stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--yellow)}
+  .stat-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--red)}
   .stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem}
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-  .service-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem;transition:border-color 0.2s,transform 0.2s}
-  .service-card:hover{border-color:var(--yellow);transform:translateY(-3px)}
+  .service-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color 0.2s,transform 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .service-card:hover{border-color:var(--red);transform:translateY(-3px)}
   .service-icon{font-size:1.5rem;margin-bottom:0.75rem}
   .service-name{font-weight:600;font-size:0.95rem}
   .service-desc{font-size:0.82rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5}
   .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-  .step{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
-  .step-num{width:36px;height:36px;border-radius:50%;background:var(--yellow);color:var(--black);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;margin-bottom:0.75rem;flex-shrink:0}
+  .step{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .step-num{width:36px;height:36px;border-radius:50%;background:var(--red);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;margin-bottom:0.75rem;flex-shrink:0}
   .step-title{font-weight:600;margin-bottom:0.4rem;font-size:0.9rem}
   .step-desc{font-size:0.82rem;color:var(--text-muted);line-height:1.5}
   .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-  .review-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
-  .review-stars{color:var(--yellow);font-size:0.9rem;margin-bottom:1rem}
+  .review-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .review-stars{color:var(--red);font-size:0.9rem;margin-bottom:1rem}
   .review-text{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;font-style:italic}
   .review-author{font-size:0.82rem;font-weight:600}
-  .contact-wrap{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  .contact-wrap{background:var(--gray-mid);border:1px solid var(--border);border-radius:16px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
   .contact-info p{color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7}
   .contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
-  .contact-detail-icon{width:36px;height:36px;border-radius:8px;background:rgba(245,200,66,0.12);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .contact-detail-icon{width:36px;height:36px;border-radius:8px;background:rgba(226,0,26,0.1);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
   .contact-detail-text{font-size:0.88rem;color:var(--text-muted)}
-  .contact-detail-text strong{color:var(--white);display:block;font-size:0.92rem}
+  .contact-detail-text strong{color:var(--black);display:block;font-size:0.92rem}
   .contact-quick{display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap}
   .contact-quick .btn-ghost{flex:1;text-align:center;padding:0.7rem 1rem;font-size:0.85rem}
-  footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
-  .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;text-decoration:none;color:var(--white)}
-  .footer-logo span{color:var(--yellow)}
+  footer{border-top:1px solid var(--border);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+  .footer-logo{display:flex;align-items:center;text-decoration:none}
+  .footer-logo img{height:26px;width:auto;display:block}
   .footer-copy{font-size:0.8rem;color:var(--text-muted)}
   .footer-links{display:flex;gap:1.5rem}
   .footer-links a{font-size:0.8rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
-  .footer-links a:hover{color:var(--white)}
+  .footer-links a:hover{color:var(--black)}
 
   @media(max-width:768px){
     .nav-links{display:none}
@@ -124,7 +126,7 @@ import { business } from '../data/business.ts';
 </style>
 
 <nav>
-  <a href="/" class="nav-logo">⚡ Elektro <span>Stebel</span></a>
+  <a href="/" class="nav-logo"><img src="/logo.svg" alt="Flirt Psychologie" /></a>
   <div class="nav-links">
     <a href="#leistungen">Leistungen</a>
     <a href="#prozess">Ablauf</a>
@@ -132,7 +134,7 @@ import { business } from '../data/business.ts';
     <a href="#kontakt">Kontakt</a>
   </div>
   <div class="nav-right">
-    <a href="#kontakt" class="nav-cta">Termin anfragen</a>
+    <a href="#kontakt" class="nav-cta">Erstgespräch anfragen</a>
     <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
     </button>
@@ -144,41 +146,51 @@ import { business } from '../data/business.ts';
   <a href="#prozess" class="mobile-link">Ablauf</a>
   <a href="#bewertungen" class="mobile-link">Bewertungen</a>
   <a href="#kontakt" class="mobile-link">Kontakt</a>
-  <a href="#kontakt" class="nav-cta">Jetzt Termin vereinbaren</a>
+  <a href="#kontakt" class="nav-cta">Jetzt Erstgespräch vereinbaren</a>
 </div>
 
 <div class="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Elektromeisterbetrieb Hannover</div>
-    <h1>Elektrotechnik,<br>die <em>wirklich</em><br>funktioniert.</h1>
-    <p class="hero-sub">Schnell, sauber und zuverlässig. Von der klassischen Installation bis zum Smart Home – in Hannover und Umgebung.</p>
+    <div class="hero-eyebrow">Beziehungscoaching Berlin</div>
+    <h1>Flirten, das<br><em>wirklich</em> gelingt.</h1>
+    <p class="hero-sub">Mehr Selbstsicherheit, echte Verbindungen und Klarheit beim Dating – mit fundiertem Coaching statt Bauchgefühl. In Berlin und deutschlandweit online.</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn-primary">Jetzt Termin vereinbaren</a>
+      <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch</a>
       <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
     </div>
   </div>
   <div class="hero-visual">
-    <img src="/stebel.jpg" alt="Elektro Stebel Hannover" loading="eager" />
+    <div class="hero-visual-icon">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="42" stroke="white" stroke-width="2.5" opacity="0.6" />
+        <g fill="white">
+          <circle cx="36" cy="34" r="9" />
+          <path d="M18 74c0-14 7.5-23 18-23s18 9 18 23z" />
+          <circle cx="63" cy="38" r="8" />
+          <path d="M47 74c0-12 7-20 16-20s16 8 16 20z" />
+        </g>
+      </svg>
+    </div>
     <div class="hero-badge">
-      <div class="badge-stat"><div class="badge-stat-num">10+</div><div class="badge-stat-label">Jahre Erfahrung</div></div>
-      <div class="badge-stat"><div class="badge-stat-num">500+</div><div class="badge-stat-label">Projekte</div></div>
-      <div class="badge-stat"><div class="badge-stat-num">24h</div><div class="badge-stat-label">Erreichbar</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">{business.stats.yearsExperience}</div><div class="badge-stat-label">Jahre Erfahrung</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">{business.stats.projectsCompleted}</div><div class="badge-stat-label">Coachings</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">{business.stats.satisfaction}</div><div class="badge-stat-label">Zufriedenheit</div></div>
     </div>
   </div>
 </div>
 
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenloses Erstgespräch <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Berlin & bundesweit online <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Fundiert & diskret <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenloses Erstgespräch <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Berlin & bundesweit online <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Fundiert & diskret <span class="ticker-dot">•</span></span>
   </div>
 </div>
 
@@ -186,17 +198,17 @@ import { business } from '../data/business.ts';
   <div class="about-grid">
     <div class="about-text">
       <div class="section-eye">Über uns</div>
-      <h2 class="section-title">Gemeinsam denken wir Elektrotechnik <em style="color:var(--yellow);font-style:normal">neu</em></h2>
-      <p>In und um Hannover sind wir als Elektromeisterbetrieb für Sie da. Von der Instandhaltung bestehender Systeme bis hin zu Neuinstallationen und Smart-Lösungen.</p>
-      <p>Mit über 10 Jahren Erfahrung und mehr als 500 abgeschlossenen Projekten stehen wir für Qualität, Pünktlichkeit und faire Preise.</p>
+      <h2 class="section-title">Gemeinsam denken wir Dating <em style="color:var(--red);font-style:normal">neu</em></h2>
+      <p>Ob erste Nachricht, erstes Date oder eine feststeckende Beziehung – wir begleiten dich mit psychologisch fundierten Methoden zu mehr Selbstsicherheit und echten Verbindungen.</p>
+      <p>Mit über 9 Jahren Erfahrung und mehr als 1200 begleiteten Coachings stehen wir für Vertrauen, Diskretion und spürbare Ergebnisse.</p>
       <br>
-      <a href="#kontakt" class="btn-primary">Kostenloses Angebot anfordern →</a>
+      <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch anfragen →</a>
     </div>
     <div class="about-stats">
-      <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Jahre Erfahrung</div></div>
-      <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Abgeschlossene Projekte</div></div>
-      <div class="stat-card"><div class="stat-num">24h</div><div class="stat-label">Erreichbar</div></div>
-      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Kundenzufriedenheit</div></div>
+      <div class="stat-card"><div class="stat-num">{business.stats.yearsExperience}</div><div class="stat-label">Jahre Erfahrung</div></div>
+      <div class="stat-card"><div class="stat-num">{business.stats.projectsCompleted}</div><div class="stat-label">Begleitete Coachings</div></div>
+      <div class="stat-card"><div class="stat-num">{business.stats.availability}</div><div class="stat-label">Auch bundesweit</div></div>
+      <div class="stat-card"><div class="stat-num">{business.stats.satisfaction}</div><div class="stat-label">Kundenzufriedenheit</div></div>
     </div>
   </div>
 </div>
@@ -205,52 +217,51 @@ import { business } from '../data/business.ts';
   <div class="section-full-inner">
     <div class="section-eye">Leistungen</div>
     <h2 class="section-title">Alles aus einer Hand</h2>
-    <p class="section-sub">Von der Planung bis zur Fertigstellung – wir sind Ihr kompetenter Ansprechpartner.</p>
+    <p class="section-sub">Von der ersten Nachricht bis zur festen Beziehung – wir sind dein kompetenter Ansprechpartner.</p>
     <div class="services-grid">
-      <div class="service-card"><div class="service-icon">🔌</div><div class="service-name">Elektroinstallation</div><div class="service-desc">Neuinstallation und Modernisierung elektrischer Anlagen</div></div>
-      <div class="service-card"><div class="service-icon">💡</div><div class="service-name">Beleuchtung & LED</div><div class="service-desc">Energieeffiziente Lichttechnik für jeden Bereich</div></div>
-      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">Smart Home</div><div class="service-desc">Intelligente Haussteuerung und Automatisierung</div></div>
-      <div class="service-card"><div class="service-icon">☀️</div><div class="service-name">Photovoltaik</div><div class="service-desc">Solaranlagen für nachhaltige Energieerzeugung</div></div>
-      <div class="service-card"><div class="service-icon">🚗</div><div class="service-name">Wallbox</div><div class="service-desc">E-Ladestation für zuhause – schnell und sicher</div></div>
-      <div class="service-card"><div class="service-icon">🚨</div><div class="service-name">Störungsdienst</div><div class="service-desc">24h Notfallservice bei Stromausfall & Störungen</div></div>
-      <div class="service-card"><div class="service-icon">🔒</div><div class="service-name">Sicherheitstechnik</div><div class="service-desc">Alarmanlage, Kamera und Zugangskontrolle</div></div>
-      <div class="service-card"><div class="service-icon">🏗️</div><div class="service-name">Gebäudeinstallation</div><div class="service-desc">Elektrik für Neubauten und Gewerbegebäude</div></div>
+      {services.map((s) => (
+        <div class="service-card">
+          <div class="service-icon">{s.icon}</div>
+          <div class="service-name">{s.name}</div>
+          <div class="service-desc">{s.shortDesc}</div>
+        </div>
+      ))}
     </div>
   </div>
 </div>
 
 <div class="section" id="prozess">
   <div class="section-eye">Unser Ablauf</div>
-  <h2 class="section-title">Schritt für Schritt zu Ihrer Lösung</h2>
-  <p class="section-sub">Transparent, zuverlässig und ohne Überraschungen.</p>
+  <h2 class="section-title">Schritt für Schritt zu deinem Ziel</h2>
+  <p class="section-sub">Transparent, vertraulich und ohne Druck.</p>
   <div class="process-steps">
-    <div class="step"><div class="step-num">1</div><div class="step-title">Beratung</div><div class="step-desc">Sie kontaktieren uns – wir melden uns innerhalb von 24h und besprechen Ihr Projekt.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-title">Planung</div><div class="step-desc">Wir beraten Sie ganzheitlich und erstellen ein unverbindliches Angebot.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-title">Ausführung</div><div class="step-desc">Wir setzen Ihr Projekt professionell um und halten Sie informiert.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-title">Fertigstellung</div><div class="step-desc">Abnahme, Übergabe und vollständige Dokumentation.</div></div>
+    <div class="step"><div class="step-num">1</div><div class="step-title">Erstgespräch</div><div class="step-desc">Du kontaktierst uns – wir melden uns innerhalb von 24h und besprechen dein Anliegen.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Analyse</div><div class="step-desc">Wir beleuchten deine Ausgangslage und erstellen einen individuellen Coaching-Plan.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Coaching</div><div class="step-desc">Wir arbeiten praxisnah an Selbstsicherheit, Kommunikation und Dating-Strategie.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Ergebnis</div><div class="step-desc">Reflexion, nachhaltige Routinen und Begleitung auch nach dem Coaching.</div></div>
   </div>
 </div>
 
 <div class="section-full" id="bewertungen">
   <div class="section-full-inner">
     <div class="section-eye">Bewertungen</div>
-    <h2 class="section-title">Das sagen unsere Kunden</h2>
-    <p class="section-sub">Echte Stimmen aus Hannover und Umgebung.</p>
+    <h2 class="section-title">Das sagen unsere Klient:innen</h2>
+    <p class="section-sub">Echte Stimmen aus Berlin und ganz Deutschland.</p>
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Schnelle und professionelle Arbeit. Herr Stebel hat unsere Wallbox perfekt installiert und alles sauber erklärt. Absolute Empfehlung!"</p>
-        <div class="review-author">Michael K., Hannover</div>
+        <p class="review-text">"Nach dem Coaching bin ich beim Dating so viel entspannter. Die Übungen waren praxisnah und nie peinlich. Absolute Empfehlung!"</p>
+        <div class="review-author">Julia K., Berlin</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Bei unserem Stromausfall war das Team innerhalb von 2 Stunden vor Ort. Sehr faire Preise und top Leistung!"</p>
-        <div class="review-author">Sandra M., Langenhagen</div>
+        <p class="review-text">"Innerhalb weniger Sessions hatte ich endlich Klarheit über meine Dating-Muster. Sehr faire Preise und top Begleitung!"</p>
+        <div class="review-author">Sven M., Hamburg</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Die Smart-Home Installation hat unser Zuhause komplett verändert. Sehr saubere Arbeit und freundlicher Service."</p>
-        <div class="review-author">Thomas B., Garbsen</div>
+        <p class="review-text">"Das Kommunikationstraining hat meine Beziehung komplett verändert. Sehr einfühlsame und professionelle Arbeit."</p>
+        <div class="review-author">Nora B., München</div>
       </div>
     </div>
   </div>
@@ -258,14 +269,14 @@ import { business } from '../data/business.ts';
 
 <div class="section" id="kontakt">
   <div class="section-eye">Kontakt</div>
-  <h2 class="section-title">Jetzt Termin vereinbaren</h2>
-  <p class="section-sub">24 Stunden täglich für Sie erreichbar.</p>
+  <h2 class="section-title">Jetzt Erstgespräch vereinbaren</h2>
+  <p class="section-sub">Diskret und unverbindlich – wir hören dir zu.</p>
   <div class="contact-wrap">
     <div class="contact-info">
-      <p>Wir sind Ihr zuverlässiger Partner für alle Elektroarbeiten in Hannover und Umgebung. Füllen Sie das Formular aus – wir melden uns innerhalb von 24h zurück.</p>
+      <p>Wir sind dein vertrauensvoller Partner für Flirtcoaching und Beziehungsberatung in Berlin und bundesweit online. Fülle das Formular aus – wir melden uns innerhalb von 24h zurück.</p>
       <div class="contact-detail">
         <div class="contact-detail-icon">📞</div>
-        <div class="contact-detail-text"><strong>{business.phone}</strong>Mo–So, 24h erreichbar</div>
+        <div class="contact-detail-text"><strong>{business.phone}</strong>{business.openingHours.display}</div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">✉️</div>
@@ -273,7 +284,7 @@ import { business } from '../data/business.ts';
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">📍</div>
-        <div class="contact-detail-text"><strong>Hannover & Umgebung</strong>Einsatzgebiet Region Hannover</div>
+        <div class="contact-detail-text"><strong>Berlin & bundesweit</strong>Vor Ort und online per Video-Call</div>
       </div>
       <div class="contact-quick">
         <a href={`tel:${business.phoneHref}`} class="btn-ghost">📞 Jetzt anrufen</a>
@@ -287,7 +298,7 @@ import { business } from '../data/business.ts';
 </div>
 
 <footer>
-  <a href="/" class="footer-logo">⚡ Elektro <span>Stebel</span></a>
+  <a href="/" class="footer-logo"><img src="/logo.svg" alt="Flirt Psychologie" /></a>
   <div class="footer-copy">© {new Date().getFullYear()} {business.name} | {business.address.city}</div>
   <div class="footer-links">
     <a href="/impressum/">Impressum</a>
