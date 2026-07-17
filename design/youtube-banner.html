@@ -83,11 +83,23 @@
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .slogan .sub{margin-top:16px;font-size:19px;letter-spacing:.05em;color:var(--muted)}
 
+  /* ---------- CTA-Pill (Conversion-Element) ---------- */
+  .cta{margin-top:26px;display:inline-flex;align-items:center;gap:13px;
+    background:linear-gradient(90deg,var(--gold2),var(--gold));
+    color:#221a08;font-weight:800;font-size:24px;letter-spacing:.005em;
+    padding:15px 30px;border-radius:999px;
+    box-shadow:0 14px 28px rgba(232,200,119,.32)}
+  .cta .arw{width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.14);
+    display:grid;place-items:center;font-size:17px;flex:none}
+
   /* dekorative Randzeilen außerhalb der Safe-Zone */
   .footer{position:absolute;left:130px;bottom:70px;font-size:19px;letter-spacing:.3em;
     text-transform:uppercase;color:rgba(174,183,204,.55);font-weight:600;z-index:3}
-  .footer2{position:absolute;right:130px;bottom:70px;font-size:19px;letter-spacing:.14em;
-    color:rgba(232,200,119,.65);font-weight:700;z-index:3}
+
+  /* ---------- Ecken-Hinweis unten rechts (zeigt zu Kanal-Links) ---------- */
+  .corner-hint{position:absolute;right:210px;bottom:220px;z-index:3;text-align:right;
+    font-size:24px;line-height:1.35;font-weight:700;letter-spacing:.01em;color:var(--gold2)}
+  .corner-arrow{position:absolute;right:24px;bottom:24px;z-index:3}
 </style>
 </head>
 <body>
@@ -117,10 +129,22 @@
       <div class="l1">Dating mit System.</div>
       <div class="l2">Psychologisch fundiert.</div>
       <div class="sub">Klarheit · Selbstsicherheit · echte Verbindung</div>
+      <div class="cta"><span class="arw">→</span>Gratis-Leitfaden: Ansprechangst überwinden</div>
     </div>
   </div>
 
   <div class="footer">Neue Videos jede Woche</div>
-  <div class="footer2">▶ Abonnieren</div>
+
+  <div class="corner-hint">Hier klicken für<br>Gratis-Report</div>
+  <svg class="corner-arrow" width="270" height="220" viewBox="0 0 270 220" fill="none">
+    <defs>
+      <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#F6E4B0"/>
+        <stop offset="1" stop-color="#E8C877"/>
+      </linearGradient>
+    </defs>
+    <path d="M14,10 C60,90 140,150 224,196" stroke="url(#arrowGrad)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M224,196 L192,182 M224,196 L200,222" stroke="url(#arrowGrad)" stroke-width="5" stroke-linecap="round"/>
+  </svg>
 </body>
 </html>
