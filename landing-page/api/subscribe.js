@@ -79,6 +79,9 @@ module.exports = async function handler(req, res) {
     `,
   };
 
+  console.log('[subscribe] apiKey present:', !!apiKey, 'len:', apiKey ? apiKey.length : 0);
+  console.log('[subscribe] notifyEmail:', notifyEmail, 'fromEmail:', fromEmail);
+
   try {
     const responses = await Promise.all(
       [notification, confirmation].map((payload) =>
@@ -93,6 +96,11 @@ module.exports = async function handler(req, res) {
       ),
     );
 
+    for (const r of responses) {
+      const text = await r.clone().text();
+      console.log('[subscribe] resend response status:', r.status, 'body:', text);
+    }
+
     const failed = responses.find((r) => !r.ok);
     if (failed) {
       res.status(502).json({ ok: false, error: 'Anmeldung konnte nicht gesendet werden. Bitte versuch es später erneut.' });
@@ -100,7 +108,8 @@ module.exports = async function handler(req, res) {
     }
 
     res.status(200).json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.log('[subscribe] threw:', err && err.stack ? err.stack : err);
     res.status(500).json({ ok: false, error: 'Anmeldung konnte nicht gesendet werden. Bitte versuch es später erneut.' });
   }
 };
