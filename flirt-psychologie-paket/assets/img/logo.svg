@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Flirt Psychologie</title>
+
+  <path d="M96,88 A48,48 0 1 1 96,32" fill="none" stroke="#E2001A" stroke-width="3" stroke-linecap="round" />
+  <circle cx="102" cy="37" r="3.3" fill="#E2001A" />
+
+  <g fill="#181818">
+    <!-- left person (behind) -->
+    <circle cx="32" cy="35" r="9" />
+    <path d="M18,96 L18,58 A14,14 0 0 1 46,58 L46,96 Z" />
+
+    <!-- right person (behind) -->
+    <circle cx="78" cy="35" r="9" />
+    <path d="M64,96 L64,58 A14,14 0 0 1 92,58 L92,96 Z" />
+
+    <!-- center person (front) -->
+    <circle cx="55" cy="26" r="11.5" />
+    <path d="M37,96 L37,53 A18,18 0 0 1 73,53 L73,96 Z" />
+  </g>
+
+  <text x="130" y="74" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="50" fill="#E2001A">FLIRT</text>
+  <text x="131" y="98" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="19" letter-spacing="4.5" fill="#3a3a3a">PSYCHOLOGIE</text>
+</svg>
