@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
     html: `
       <p>Hallo${name ? ' ' + escapeHtml(name) : ''},</p>
       <p>danke für dein Interesse! Wir melden uns in Kürze mit deinem kostenlosen Report.</p>
-      <p>Viele Grüße<br>Dating Coach Quincy</p>
+      <p>Viele Grüße<br>Quincy – Experte für Gesprächsführung</p>
     `,
   };
 

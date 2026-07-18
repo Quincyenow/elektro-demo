@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gratis-Report sichern | Dating Coach Quincy – Flirt-Psychologie</title>
-<meta name="description" content="Starte deine Transformation zum selbstsicheren Mann – psychologisch fundierte Dating-Strategien von Dating Coach Quincy. Jetzt kostenlosen Report sichern." />
+<title>Gratis-Report sichern | Quincy – Experte für Gesprächsführung</title>
+<meta name="description" content="Starte deine Transformation zum selbstsicheren Mann – psychologisch fundierte Strategien von Quincy, deinem Experten für Gesprächsführung. Jetzt kostenlosen Report sichern." />
 <meta name="robots" content="noindex" />
 
 <style>
@@ -203,13 +203,19 @@
   <div class="wrap">
   <div id="landing-view">
 
-    <!-- ============ 1 · VIDEO-PLATZHALTER ============ -->
+    <!-- ============ 1 · VIDEO (modular) ============ -->
+    <!--
+      Sobald das Video fertig ist: NUR die Zeile "const VIDEO_URL = ...;"
+      weiter unten im Script-Block ausfüllen (YouTube-Embed-Link oder Link
+      zu einer gehosteten Datei). Der Platzhalter blendet sich dann
+      automatisch aus, das Layout (16:9-Box) bleibt in beiden Fällen exakt
+      gleich groß, es "springt" also nichts.
+    -->
     <div class="video-box">
-      <!-- Sobald das Video fertig ist: src hier einsetzen und den
-           .video-placeholder-Block darunter entfernen bzw. ausblenden -->
       <iframe
+        id="video-embed"
         src=""
-        title="Dating Coach Quincy – Dein Weg zum Dating-Erfolg"
+        title="Quincy, Experte für Gesprächsführung – Dein Weg zum Dating-Erfolg"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
@@ -227,7 +233,7 @@
     <div class="cta-wrap">
       <a href="#newsletter" class="btn-cta">
         <span class="arw">→</span>
-        Jetzt zum Newsletter anmelden &amp; Gratis-Report sichern
+        Gratis-Report anfordern
       </a>
       <p class="cta-note">Kostenlos · Kein Spam · Jederzeit abbestellbar</p>
     </div>
@@ -235,7 +241,7 @@
     <!-- ============ 3 · NUTZEN-HEADLINE ============ -->
     <h1 class="headline">
       Starte deine Transformation zum <span class="accent">selbstsicheren Mann</span> –
-      psychologisch fundierte Strategien von Dating Coach Quincy.
+      psychologisch fundierte Strategien von Quincy, deinem Experten für Gesprächsführung.
     </h1>
 
     <!-- ============ 4 · TRUST-SEKTION ============ -->
@@ -280,7 +286,7 @@
     <div class="funnel-step active" data-step="thanks">
       <div class="step-eyebrow">Fast geschafft</div>
       <h2>Danke, deine Anmeldung ist da!</h2>
-      <p class="step-lead">Dein Gratis-Report ist unterwegs. Willst du direkt den nächsten Schritt gehen? Buche jetzt dein kostenloses Erstgespräch mit Dating Coach Quincy.</p>
+      <p class="step-lead">Dein Gratis-Report ist unterwegs. Willst du direkt den nächsten Schritt gehen? Buche jetzt dein kostenloses Erstgespräch mit Quincy, deinem Experten für Gesprächsführung.</p>
       <button type="button" class="btn-submit" id="start-spin-btn" style="max-width:360px;margin:0 auto">Jetzt Erstgespräch buchen</button>
     </div>
 
@@ -338,7 +344,7 @@
     <div class="funnel-step" data-step="calendly">
       <div class="step-eyebrow">Letzter Schritt</div>
       <h2>Wähle jetzt deinen Wunschtermin</h2>
-      <p class="step-lead">Danke für deine Antworten! Sichere dir dein kostenloses 30-minütiges Erstgespräch mit Dating Coach Quincy.</p>
+      <p class="step-lead">Danke für deine Antworten! Sichere dir dein kostenloses 30-minütiges Erstgespräch mit Quincy, deinem Experten für Gesprächsführung.</p>
       <div id="calendly-container" class="calendly-box" data-url="https://calendly.com/datingcoachquincy/30-minuten-erstgesprach?hide_gdpr_banner=1&background_color=0b1c3f&text_color=f7f5ef&primary_color=e8c877">
         <div id="calendly-placeholder" class="calendly-placeholder">
           <p>Aus Datenschutzgründen wird der Terminkalender (Calendly) erst nach deiner Zustimmung geladen. Dabei werden Daten an Calendly&nbsp;LLC (USA) übertragen.</p>
@@ -352,13 +358,26 @@
   <!-- /#funnel-view -->
 
   <footer>
-    © 2026 Dating Coach Quincy · Flirt-Psychologie. Alle Rechte vorbehalten. ·
+    © 2026 Quincy – Experte für Gesprächsführung · Flirt-Psychologie. Alle Rechte vorbehalten. ·
     <a href="impressum.html" style="color:var(--gold);text-decoration:underline">Impressum</a> ·
     <a href="datenschutz.html" style="color:var(--gold);text-decoration:underline">Datenschutzerklärung</a>
   </footer>
   </div>
 
   <script>
+    // ===== Video: hier die YouTube-Embed-URL (oder Link zu einer gehosteten
+    // Datei) eintragen, sobald das Video fertig ist. Der Platzhalter blendet
+    // sich dann automatisch aus, sonst passiert nichts weiter.
+    // Beispiel: 'https://www.youtube.com/embed/DEINE_VIDEO_ID'
+    const VIDEO_URL = '';
+
+    const videoEmbed = document.getElementById('video-embed');
+    const videoPlaceholder = document.getElementById('video-placeholder');
+    if (VIDEO_URL && videoEmbed) {
+      videoEmbed.src = VIDEO_URL;
+      if (videoPlaceholder) videoPlaceholder.style.display = 'none';
+    }
+
     const form = document.getElementById('newsletter-form');
     const status = document.getElementById('nl-status');
     const submitBtn = document.getElementById('nl-submit');
@@ -472,7 +491,7 @@
 
         const iframe = document.createElement('iframe');
         iframe.src = prefilledUrl;
-        iframe.title = 'Termin bei Dating Coach Quincy buchen';
+        iframe.title = 'Termin bei Quincy, deinem Experten für Gesprächsführung, buchen';
         iframe.style.cssText = 'width:100%;min-width:280px;height:680px;border:0;display:block';
         container.innerHTML = '';
         container.appendChild(iframe);
