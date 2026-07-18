@@ -50,12 +50,21 @@ module.exports = async function handler(req, res) {
       body = {};
     }
   }
-  const { name, email, utm } = body || {};
+  const { name, email, utm, leadMagnet } = body || {};
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     res.status(400).json({ ok: false, error: 'Bitte eine gültige E-Mail-Adresse angeben.' });
     return;
   }
+
+  // Nur bekannte Report-Dateien zulassen (kein beliebiger Pfad von außen).
+  const reportFile =
+    leadMagnet && typeof leadMagnet.file === 'string' && /^assets\/reports\/[a-z0-9_-]+\.pdf$/.test(leadMagnet.file)
+      ? leadMagnet.file
+      : 'assets/reports/default.pdf';
+  const reportTitle = leadMagnet && leadMagnet.title ? String(leadMagnet.title) : 'Dein Gratis-Report';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const downloadUrl = `https://${host}/${reportFile}`;
 
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
@@ -75,6 +84,7 @@ module.exports = async function handler(req, res) {
       <h2>Neue Newsletter-Anmeldung über die Landing Page</h2>
       <p><strong>Name:</strong> ${escapeHtml(name || '–')}</p>
       <p><strong>E-Mail:</strong> ${escapeHtml(email)}</p>
+      <p><strong>Angeforderter Report:</strong> ${escapeHtml(reportTitle)}</p>
       ${utmToHtml(utm)}
     `,
   };
@@ -82,10 +92,11 @@ module.exports = async function handler(req, res) {
   const confirmation = {
     from: fromEmail,
     to: email,
-    subject: 'Dein Gratis-Report ist unterwegs',
+    subject: `${reportTitle} – hier ist dein Download`,
     html: `
       <p>Hallo${name ? ' ' + escapeHtml(name) : ''},</p>
-      <p>danke für dein Interesse! Wir melden uns in Kürze mit deinem kostenlosen Report.</p>
+      <p>danke für dein Interesse! Hier ist dein Report zum Download:</p>
+      <p><a href="${downloadUrl}">${escapeHtml(reportTitle)} herunterladen</a></p>
       <p>Viele Grüße<br>Quincy – Experte für Gesprächsführung</p>
     `,
   };

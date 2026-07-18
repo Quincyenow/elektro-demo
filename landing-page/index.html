@@ -282,11 +282,13 @@
   <!-- ============ 6 · SPIN-FUNNEL ============ -->
   <div id="funnel-view" class="funnel" hidden>
 
-    <!-- Danke & Qualifizierung -->
+    <!-- Danke & Download & Qualifizierung -->
     <div class="funnel-step active" data-step="thanks">
       <div class="step-eyebrow">Fast geschafft</div>
-      <h2>Danke, deine Anmeldung ist da!</h2>
-      <p class="step-lead">Dein Gratis-Report ist unterwegs. Willst du direkt den nächsten Schritt gehen? Buche jetzt dein kostenloses Erstgespräch mit Quincy, deinem Experten für Gesprächsführung.</p>
+      <h2 id="thanks-heading">Dein Gratis-Report ist da!</h2>
+      <p class="step-lead" id="thanks-lead">Klick unten, um ihn direkt herunterzuladen. Wir haben dir den Link zusätzlich per E-Mail geschickt.</p>
+      <a href="#" id="download-report-btn" download class="btn-submit" style="max-width:360px;margin:0 auto;display:inline-flex;align-items:center;justify-content:center;text-decoration:none">Jetzt herunterladen</a>
+      <p class="step-lead" style="margin-top:28px">Willst du direkt den nächsten Schritt gehen? Buche jetzt dein kostenloses Erstgespräch mit Quincy, deinem Experten für Gesprächsführung.</p>
       <button type="button" class="btn-submit" id="start-spin-btn" style="max-width:360px;margin:0 auto">Jetzt Erstgespräch buchen</button>
     </div>
 
@@ -400,6 +402,41 @@
       return {};
     }
 
+    // ===== Gratis-Report je nach Video/Thema: Für jedes neue YouTube-Video
+    // mit eigenem PDF hier einen Eintrag hinzufügen. Der Link im Video
+    // bekommt dann den passenden ?lead_magnet=<key> Parameter, z.B.:
+    // https://goflirtpsychologie.de/?lead_magnet=ansprechangst
+    // Die PDF-Datei selbst liegt unter landing-page/assets/reports/ -- dort
+    // die Platzhalter-Dateien durch die echten Reports ersetzen.
+    const LEAD_MAGNETS = {
+      default: { title: 'Dein Gratis-Report', file: 'assets/reports/default.pdf' },
+      ansprechangst: { title: 'Ansprechangst überwinden – Gratis-Report', file: 'assets/reports/ansprechangst.pdf' },
+    };
+
+    function getLeadMagnet() {
+      const params = new URLSearchParams(location.search);
+      const key = params.get('lead_magnet');
+      if (key && LEAD_MAGNETS[key]) {
+        try { sessionStorage.setItem('lead_magnet', key); } catch {}
+        return { key, ...LEAD_MAGNETS[key] };
+      }
+      try {
+        const stored = sessionStorage.getItem('lead_magnet');
+        if (stored && LEAD_MAGNETS[stored]) return { key: stored, ...LEAD_MAGNETS[stored] };
+      } catch {}
+      return { key: 'default', ...LEAD_MAGNETS.default };
+    }
+
+    const leadMagnet = getLeadMagnet();
+
+    const downloadBtn = document.getElementById('download-report-btn');
+    if (downloadBtn) downloadBtn.href = leadMagnet.file;
+
+    const thanksHeading = document.getElementById('thanks-heading');
+    if (thanksHeading && leadMagnet.key !== 'default') {
+      thanksHeading.textContent = leadMagnet.title + ' ist da!';
+    }
+
     const form = document.getElementById('newsletter-form');
     const status = document.getElementById('nl-status');
     const submitBtn = document.getElementById('nl-submit');
@@ -418,6 +455,7 @@
         email: String(formData.get('email') || ''),
         hp: String(formData.get('hp') || ''),
         utm: lead.utm,
+        leadMagnet: { title: leadMagnet.title, file: leadMagnet.file },
       };
 
       submitBtn.disabled = true;
