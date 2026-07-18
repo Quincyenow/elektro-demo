@@ -468,12 +468,14 @@
         let prefilledUrl = CAL_URL;
         if (lead.name) prefilledUrl += '&name=' + encodeURIComponent(lead.name);
         if (lead.email) prefilledUrl += '&email=' + encodeURIComponent(lead.email);
+        prefilledUrl += '&embed_domain=' + encodeURIComponent(location.hostname) + '&embed_type=Inline';
 
-        container.innerHTML = '<div class="calendly-inline-widget" data-url="' + prefilledUrl + '" style="min-width:280px;height:680px;"></div>';
-        const s = document.createElement('script');
-        s.src = 'https://assets.calendly.com/assets/external/widget.js';
-        s.async = true;
-        document.body.appendChild(s);
+        const iframe = document.createElement('iframe');
+        iframe.src = prefilledUrl;
+        iframe.title = 'Termin bei Dating Coach Quincy buchen';
+        iframe.style.cssText = 'width:100%;min-width:280px;height:680px;border:0;display:block';
+        container.innerHTML = '';
+        container.appendChild(iframe);
       }
 
       document.getElementById('calendly-load-btn')?.addEventListener('click', loadCalendly);
