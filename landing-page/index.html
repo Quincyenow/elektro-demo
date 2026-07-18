@@ -464,7 +464,12 @@
       function loadCalendly() {
         if (!container || container.getAttribute('data-loaded')) return;
         container.setAttribute('data-loaded', '1');
-        container.innerHTML = '<div class="calendly-inline-widget" data-url="' + CAL_URL + '" style="min-width:280px;height:680px;"></div>';
+
+        let prefilledUrl = CAL_URL;
+        if (lead.name) prefilledUrl += '&name=' + encodeURIComponent(lead.name);
+        if (lead.email) prefilledUrl += '&email=' + encodeURIComponent(lead.email);
+
+        container.innerHTML = '<div class="calendly-inline-widget" data-url="' + prefilledUrl + '" style="min-width:280px;height:680px;"></div>';
         const s = document.createElement('script');
         s.src = 'https://assets.calendly.com/assets/external/widget.js';
         s.async = true;
