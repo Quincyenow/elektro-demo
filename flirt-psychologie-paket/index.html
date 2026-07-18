@@ -15,8 +15,66 @@
   <style>
     body{-webkit-font-smoothing:antialiased}
     .aura::before{content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(1100px 520px at 85% -10%, rgba(99,102,241,.18), transparent 60%),
-                 radial-gradient(900px 500px at 5% 110%, rgba(245,158,11,.10), transparent 55%);}
+      background:radial-gradient(1100px 520px at 85% -10%, rgba(232,200,119,.14), transparent 60%),
+                 radial-gradient(900px 500px at 5% 110%, rgba(18,42,92,.5), transparent 55%);}
+
+    /* ===== Verfeinertes Design-System: Whitespace, Typografie, Karten ===== */
+    :root{
+      --shadow-card: 0 24px 60px -24px rgba(5,11,28,.65);
+      --shadow-card-hover: 0 30px 70px -20px rgba(5,11,28,.8);
+      --gold-ring: 1px solid rgba(232,200,119,.14);
+    }
+
+    .section-pad{padding-top:clamp(4.5rem,9vw,7.5rem);padding-bottom:clamp(4.5rem,9vw,7.5rem)}
+    .hero-pad{padding-top:clamp(3.5rem,8vw,6rem);padding-bottom:clamp(4rem,9vw,7rem)}
+
+    .hero-title{font-size:clamp(2.35rem,5.2vw,3.75rem);line-height:1.12;letter-spacing:-.02em}
+    .section-title{font-size:clamp(1.75rem,3.4vw,2.5rem);letter-spacing:-.01em;line-height:1.2}
+
+    .card{
+      border-radius:1.25rem;
+      border:var(--gold-ring);
+      background:linear-gradient(180deg, rgba(18,42,92,.5), rgba(11,28,63,.28));
+      box-shadow:var(--shadow-card);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-card-hover);border-color:rgba(232,200,119,.32)}
+
+    .icon-badge{
+      display:grid;place-items:center;width:3.1rem;height:3.1rem;border-radius:1rem;flex:none;
+      background:linear-gradient(135deg, rgba(232,200,119,.2), rgba(232,200,119,.06));
+      color:#e8c877;font-size:1.2rem;
+      box-shadow:inset 0 0 0 1px rgba(232,200,119,.18);
+    }
+
+    .trust-chip{
+      display:inline-flex;align-items:center;gap:.55rem;
+      padding:.65rem 1.15rem;border-radius:999px;
+      background:rgba(18,42,92,.55);border:1px solid rgba(232,200,119,.16);
+      font-size:.875rem;font-weight:600;color:#f1f0ea;
+      box-shadow:0 10px 24px -14px rgba(5,11,28,.7);
+    }
+    .trust-chip i{color:#e8c877}
+
+    .btn-gold{
+      border-radius:999px;font-weight:800;
+      background:linear-gradient(135deg,#f6e4b0,#e8c877);
+      color:#221a08;box-shadow:0 18px 40px -12px rgba(232,200,119,.5);
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 22px 48px -10px rgba(232,200,119,.6);background:linear-gradient(135deg,#fbeecb,#f0d28f)}
+
+    .step-num{
+      display:grid;place-items:center;width:2.85rem;height:2.85rem;border-radius:.9rem;flex:none;
+      background:linear-gradient(135deg,#f6e4b0,#e8c877);color:#221a08;font-weight:800;
+      box-shadow:0 12px 26px -10px rgba(232,200,119,.55);
+    }
+
+    .calendly-card{
+      border-radius:1.5rem;border:var(--gold-ring);
+      background:linear-gradient(180deg, rgba(11,28,63,.7), rgba(5,11,28,.55));
+      box-shadow:var(--shadow-card);
+    }
   </style>
 </head>
 
@@ -28,13 +86,13 @@
       <a href="#top" class="flex items-center gap-2.5">
         <img src="assets/img/logo.png" alt="Flirt Psychologie" class="h-9 w-auto" />
       </a>
-      <a href="#termin" class="hidden rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg shadow-amber-500/20 transition hover:bg-amber-400 sm:inline-block">Gratis-Analyse buchen</a>
+      <a href="#termin" class="btn-gold hidden px-5 py-2.5 text-sm sm:inline-block">Gratis-Analyse buchen</a>
     </div>
   </header>
 
   <!-- ============ 1 · HERO ============ -->
   <section id="top" class="aura relative overflow-hidden">
-    <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 sm:py-20 lg:grid-cols-2 lg:gap-12">
+    <div class="hero-pad mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-2 lg:gap-12">
       <!-- Foto (auf Desktop links) -->
       <div class="relative order-2 mx-auto w-full max-w-sm lg:order-1 lg:max-w-md">
         <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-indigo-500/25 via-transparent to-amber-500/20 blur-2xl"></div>
@@ -51,24 +109,24 @@
         <span class="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-widest text-indigo-300">
           <i class="fa-solid fa-shield-halved"></i> Flirt-Psychologie · Seriöses Dating-Coaching
         </span>
-        <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.12] text-white sm:text-5xl lg:text-[3.15rem]">
+        <h1 class="hero-title mt-6 font-display font-extrabold text-white">
           Die Psychologie des Flirtens: Wie du als anständiger Mann die Friendzone verlässt und deine
           <span class="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">Traumpartnerin auf Augenhöhe</span> anziehst.
         </h1>
-        <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-300 lg:mx-0">
+        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-300 lg:mx-0">
           Ohne auswendig gelernte Anmachsprüche oder dich verstellen zu müssen. Lerne, wie du durch <strong class="text-white">echte Ausstrahlung</strong> und emotionale Anziehungskraft Frauen begeisterst.
         </p>
-        <div class="mt-8">
-          <a href="#termin" class="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-amber-500 px-7 py-4 text-base font-bold text-slate-900 shadow-xl shadow-amber-500/25 transition hover:-translate-y-0.5 hover:bg-amber-400 sm:w-auto">
+        <div class="mt-9">
+          <a href="#termin" class="btn-gold group inline-flex w-full items-center justify-center gap-3 px-7 py-4 text-base sm:w-auto">
             <i class="fa-solid fa-calendar-check"></i>
             Jetzt kostenlose Dating-Analyse sichern (15 Min.)
             <span class="transition group-hover:translate-x-0.5">→</span>
           </a>
         </div>
-        <div class="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-400 lg:justify-start">
-          <span><i class="fa-solid fa-lock mr-1.5 text-indigo-400"></i>100 % diskret</span>
-          <span><i class="fa-solid fa-gift mr-1.5 text-indigo-400"></i>kostenlos &amp; unverbindlich</span>
-          <span><i class="fa-solid fa-star mr-1.5 text-amber-400"></i>psychologisch fundiert</span>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <span class="trust-chip"><i class="fa-solid fa-lock"></i>100&nbsp;% diskret</span>
+          <span class="trust-chip"><i class="fa-solid fa-gift"></i>Kostenlos &amp; unverbindlich</span>
+          <span class="trust-chip"><i class="fa-solid fa-star"></i>Psychologisch fundiert</span>
         </div>
       </div>
     </div>
@@ -76,28 +134,28 @@
 
   <!-- ============ 2 · SCHMERZPUNKTE ============ -->
   <section class="border-y border-white/5 bg-slate-950/40">
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+    <div class="section-pad mx-auto max-w-6xl px-5">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Kommt dir das bekannt vor?</h2>
+        <h2 class="section-title font-display font-extrabold text-white">Kommt dir das bekannt vor?</h2>
         <p class="mt-4 text-lg text-slate-400">Wenn du dich in einem dieser Punkte wiedererkennst, bist du hier goldrichtig.</p>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-3">
         <!-- 1 -->
-        <div class="group rounded-2xl border border-white/5 bg-slate-800/50 p-7 transition hover:-translate-y-1 hover:border-indigo-400/40">
-          <div class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-indigo-500/10 text-xl text-indigo-400"><i class="fa-solid fa-heart-crack"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-5"><i class="fa-solid fa-heart-crack"></i></div>
           <h3 class="font-display text-xl font-bold text-white">Die Kumpelschublade</h3>
           <p class="mt-3 leading-relaxed text-slate-400">Du bist immer der nette Zuhörer, die Schulter zum Anlehnen – aber nie der Mann, den sie begehrt. „Du bist wie ein bester Freund für mich" hast du oft genug gehört. Und jedes Mal tut es weh.</p>
         </div>
         <!-- 2 -->
-        <div class="group rounded-2xl border border-white/5 bg-slate-800/50 p-7 transition hover:-translate-y-1 hover:border-indigo-400/40">
-          <div class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-indigo-500/10 text-xl text-indigo-400"><i class="fa-solid fa-comment-slash"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-5"><i class="fa-solid fa-comment-slash"></i></div>
           <h3 class="font-display text-xl font-bold text-white">Die Blockade beim Ansprechen</h3>
           <p class="mt-3 leading-relaxed text-slate-400">Du siehst eine interessante Frau – und dein Kopf ist plötzlich leer. Die Angst vor Ablehnung lähmt dich, du zögerst, der Moment verstreicht. Abends ärgerst du dich über die verpasste Chance.</p>
         </div>
         <!-- 3 -->
-        <div class="group rounded-2xl border border-white/5 bg-slate-800/50 p-7 transition hover:-translate-y-1 hover:border-indigo-400/40">
-          <div class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-indigo-500/10 text-xl text-indigo-400"><i class="fa-solid fa-snowflake"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-5"><i class="fa-solid fa-snowflake"></i></div>
           <h3 class="font-display text-xl font-bold text-white">Kein Knistern auf Dates</h3>
           <p class="mt-3 leading-relaxed text-slate-400">Eure Gespräche sind nett – aber nett wie mit einem Arbeitskollegen. Es entsteht keine Spannung, kein Knistern, keine Anziehung. Und du spürst genau: So wird daraus nie mehr als Freundschaft.</p>
         </div>
@@ -111,43 +169,43 @@
 
   <!-- ============ 3 · FLIRT-PSYCHOLOGIE / ANSATZ ============ -->
   <section class="bg-slate-900">
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+    <div class="section-pad mx-auto max-w-6xl px-5">
       <div class="mx-auto max-w-2xl text-center">
         <span class="text-sm font-bold uppercase tracking-widest text-indigo-400">Warum klassische Tipps scheitern</span>
-        <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Anziehung ist kein Zufall – sie ist Psychologie.</h2>
+        <h2 class="section-title mt-3 font-display font-extrabold text-white">Anziehung ist kein Zufall – sie ist Psychologie.</h2>
         <p class="mt-4 text-lg leading-relaxed text-slate-400">
           „Sei einfach du selbst" oder auswendig gelernte Sprüche funktionieren nicht – weil Anziehung nicht über Worte entsteht, sondern über <strong class="text-slate-200">Signale, die tiefer wirken</strong>. Genau hier setzt echte Flirt-Psychologie an.
         </p>
       </div>
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-person-rays"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-person-rays"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Körpersprache &amp; Präsenz</h3>
           <p class="mt-2 text-slate-400">Über 90 % deiner Wirkung sind nonverbal. Wie du stehst, blickst und sprichst, entscheidet – oft bevor du das erste Wort sagst.</p>
         </div>
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-bolt"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-bolt"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Emotionale Trigger</h3>
           <p class="mt-2 text-slate-400">Menschen verlieben sich über Emotionen, nicht über Logik. Du lernst, echte Spannung und positive Gefühle entstehen zu lassen – ganz ohne Manipulation.</p>
         </div>
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-shield-heart"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-shield-heart"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Selbstwert von innen</h3>
           <p class="mt-2 text-slate-400">Echte Ausstrahlung lässt sich nicht faken. Wer im Inneren gefestigt ist, wirkt automatisch anziehend. Wir bauen dein Selbstbewusstsein an der Wurzel auf.</p>
         </div>
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-comments"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-comments"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Gespräche mit Sog</h3>
           <p class="mt-2 text-slate-400">Weg vom Interview-Modus. Du lernst, Gespräche zu führen, die fesseln, verbinden und die richtige Spannung aufbauen.</p>
         </div>
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-brain"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-brain"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Mindset statt Maschen</h3>
           <p class="mt-2 text-slate-400">Keine Tricks für eine Nacht. Wir verändern, wie du über dich, Frauen und Dating denkst – nachhaltig und authentisch.</p>
         </div>
-        <div class="rounded-2xl border border-white/5 bg-slate-800/40 p-7">
-          <div class="mb-4 text-2xl text-amber-400"><i class="fa-solid fa-handshake-angle"></i></div>
+        <div class="card p-7">
+          <div class="icon-badge mb-4"><i class="fa-solid fa-handshake-angle"></i></div>
           <h3 class="font-display text-lg font-bold text-white">Auf Augenhöhe</h3>
           <p class="mt-2 text-slate-400">Es geht nicht darum, Frauen zu „erobern", sondern die Richtige anzuziehen – respektvoll, ehrlich und auf Augenhöhe.</p>
         </div>
@@ -157,7 +215,7 @@
 
   <!-- ============ 4 · ÜBER QUINCY ============ -->
   <section class="border-y border-white/5 bg-slate-950/40">
-    <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:py-20 lg:grid-cols-5">
+    <div class="section-pad mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-5">
       <div class="lg:col-span-2">
         <div class="relative mx-auto w-full max-w-xs">
           <div class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-indigo-500/25 to-amber-500/15 blur-xl"></div>
@@ -167,7 +225,7 @@
       </div>
       <div class="lg:col-span-3">
         <span class="text-sm font-bold uppercase tracking-widest text-indigo-400">Über deinen Coach</span>
-        <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Hi, ich bin Quincy.</h2>
+        <h2 class="section-title mt-3 font-display font-extrabold text-white">Hi, ich bin Quincy.</h2>
         <p class="mt-5 text-lg leading-relaxed text-slate-300">
           Ich bin Dating-Coach für Männer, die es ernst meinen – und die spüren, dass sie eigentlich viel mehr zu bieten haben, als bei Frauen ankommt. Mein Ansatz ist tiefgründig und psychologisch fundiert: kein billiger Pick-up-Vibe, keine manipulativen Maschen, sondern echte Persönlichkeitsentwicklung.
         </p>
@@ -175,9 +233,9 @@
           Mir ist wichtig, dass du dich bei mir sicher fühlst. Alles, was wir besprechen, bleibt <strong class="text-white">absolut vertraulich</strong>. Ich urteile nicht – ich höre zu, verstehe deine Situation und zeige dir einen ehrlichen, gangbaren Weg. Mit Empathie, Klartext und echtem Interesse an deinem Erfolg.
         </p>
         <div class="mt-7 flex flex-wrap gap-3">
-          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/60 px-4 py-2 text-sm text-slate-200"><i class="fa-solid fa-heart text-indigo-400"></i> Empathie</span>
-          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/60 px-4 py-2 text-sm text-slate-200"><i class="fa-solid fa-user-shield text-indigo-400"></i> Diskretion</span>
-          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/60 px-4 py-2 text-sm text-slate-200"><i class="fa-solid fa-handshake text-indigo-400"></i> Vertrauen</span>
+          <span class="trust-chip"><i class="fa-solid fa-heart"></i>Empathie</span>
+          <span class="trust-chip"><i class="fa-solid fa-user-shield"></i>Diskretion</span>
+          <span class="trust-chip"><i class="fa-solid fa-handshake"></i>Vertrauen</span>
         </div>
       </div>
     </div>
@@ -185,32 +243,32 @@
 
   <!-- ============ 5 · 3 SCHRITTE ============ -->
   <section class="bg-slate-900">
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+    <div class="section-pad mx-auto max-w-6xl px-5">
       <div class="mx-auto max-w-2xl text-center">
-        <h2 class="font-display text-3xl font-extrabold text-white sm:text-4xl">Dein Weg zum Erstgespräch</h2>
+        <h2 class="section-title font-display font-extrabold text-white">Dein Weg zum Erstgespräch</h2>
         <p class="mt-4 text-lg text-slate-400">In 3 einfachen Schritten zu deinem persönlichen Fahrplan.</p>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-3">
-        <div class="relative rounded-2xl border border-white/5 bg-slate-800/50 p-7">
+        <div class="card relative p-7">
           <div class="mb-4 flex items-center gap-3">
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-amber-500 font-display text-lg font-extrabold text-slate-900">1</span>
+            <span class="step-num font-display">1</span>
             <i class="fa-solid fa-calendar-day text-xl text-indigo-400"></i>
           </div>
           <h3 class="font-display text-xl font-bold text-white">Termin wählen</h3>
           <p class="mt-2 leading-relaxed text-slate-400">Wähle unten im Kalender einfach einen freien Wunschtermin, der dir passt. Dauert keine 30 Sekunden.</p>
         </div>
-        <div class="relative rounded-2xl border border-white/5 bg-slate-800/50 p-7">
+        <div class="card relative p-7">
           <div class="mb-4 flex items-center gap-3">
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-amber-500 font-display text-lg font-extrabold text-slate-900">2</span>
+            <span class="step-num font-display">2</span>
             <i class="fa-solid fa-phone-volume text-xl text-indigo-400"></i>
           </div>
           <h3 class="font-display text-xl font-bold text-white">Kurze Analyse</h3>
           <p class="mt-2 leading-relaxed text-slate-400">Wir telefonieren 15 Minuten ganz entspannt und schauen uns deine aktuelle Situation an. Kein Druck, kein Verkaufsgespräch.</p>
         </div>
-        <div class="relative rounded-2xl border border-white/5 bg-slate-800/50 p-7">
+        <div class="card relative p-7">
           <div class="mb-4 flex items-center gap-3">
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-amber-500 font-display text-lg font-extrabold text-slate-900">3</span>
+            <span class="step-num font-display">3</span>
             <i class="fa-solid fa-map-location-dot text-xl text-indigo-400"></i>
           </div>
           <h3 class="font-display text-xl font-bold text-white">Dein Fahrplan</h3>
@@ -222,23 +280,29 @@
 
   <!-- ============ 6 · CALENDLY ============ -->
   <section id="termin" class="relative overflow-hidden border-y border-indigo-400/10 bg-gradient-to-b from-indigo-950/60 to-slate-950">
-    <div class="mx-auto max-w-4xl px-5 py-16 sm:py-20">
+    <div class="section-pad mx-auto max-w-4xl px-5">
       <div class="mx-auto max-w-2xl text-center">
         <span class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-amber-400"><i class="fa-solid fa-gift"></i> Kostenlos &amp; unverbindlich</span>
-        <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Sichere dir jetzt deine Dating-Analyse</h2>
+        <h2 class="section-title mt-3 font-display font-extrabold text-white">Sichere dir jetzt deine Dating-Analyse</h2>
         <p class="mt-4 text-lg text-slate-300">Ich vergebe pro Woche nur eine begrenzte Anzahl an kostenlosen Erstgesprächen. Wähle unten einfach deinen Wunschtermin:</p>
       </div>
 
-      <div class="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-2 shadow-2xl sm:p-3">
+      <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+        <span class="trust-chip"><i class="fa-solid fa-gift"></i>Kostenlos</span>
+        <span class="trust-chip"><i class="fa-solid fa-lock"></i>100&nbsp;% diskret</span>
+        <span class="trust-chip"><i class="fa-solid fa-star"></i>Psychologisch fundiert</span>
+      </div>
+
+      <div class="calendly-card mt-8 overflow-hidden p-2 sm:p-3">
         <!-- ===== Calendly Inline-Widget (lädt erst nach Einwilligung, DSGVO) ===== -->
         <!-- TODO: Ersetze DEIN_CALENDLY_LINK durch deinen echten Calendly-Link -->
         <div id="calendly-container"
-             data-url="https://calendly.com/DEIN_CALENDLY_LINK?hide_gdpr_banner=1&background_color=0f172a&text_color=e2e8f0&primary_color=f59e0b">
+             data-url="https://calendly.com/DEIN_CALENDLY_LINK?hide_gdpr_banner=1&background_color=0b1c3f&text_color=f7f5ef&primary_color=e8c877">
           <!-- Platzhalter, solange keine Einwilligung vorliegt -->
           <div id="calendly-placeholder" class="flex min-h-[420px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-white/15 bg-slate-800/40 p-8 text-center">
             <i class="fa-solid fa-calendar-lock text-3xl text-indigo-400"></i>
             <p class="max-w-md text-slate-300">Aus Datenschutzgründen wird der Terminkalender (Calendly) erst nach deiner Zustimmung geladen. Dabei werden Daten an Calendly&nbsp;LLC (USA) übertragen.</p>
-            <button type="button" id="calendly-load-btn" class="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-amber-400">
+            <button type="button" id="calendly-load-btn" class="btn-gold inline-flex items-center gap-2 px-6 py-3 text-sm">
               <i class="fa-solid fa-unlock"></i> Kalender laden &amp; Termin wählen
             </button>
             <a href="datenschutz.html" class="text-xs text-slate-500 underline hover:text-amber-400">Mehr in der Datenschutzerklärung</a>
@@ -270,7 +334,7 @@
 
   <!-- ============ Sticky Mobile-CTA ============ -->
   <div class="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-900/95 p-3 backdrop-blur sm:hidden">
-    <a href="#termin" class="flex w-full items-center justify-center gap-2 rounded-full bg-amber-500 px-6 py-3.5 text-base font-bold text-slate-900 shadow-lg">
+    <a href="#termin" class="btn-gold flex w-full items-center justify-center gap-2 px-6 py-3.5 text-base">
       <i class="fa-solid fa-calendar-check"></i> Gratis Dating-Analyse buchen
     </a>
   </div>
@@ -286,7 +350,7 @@
       </p>
       <div class="flex w-full flex-none gap-2 sm:w-auto">
         <button type="button" id="consent-decline" class="flex-1 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/5 sm:flex-none">Nur notwendige</button>
-        <button type="button" id="consent-accept" class="flex-1 rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900 shadow-lg transition hover:bg-amber-400 sm:flex-none">Akzeptieren</button>
+        <button type="button" id="consent-accept" class="btn-gold flex-1 px-5 py-2.5 text-sm sm:flex-none">Akzeptieren</button>
       </div>
     </div>
   </div>
