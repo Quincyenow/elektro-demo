@@ -1,4 +1,4 @@
-# Landing Page – Dr. Quincy | Flirt-Psychologie
+# Landing Page – Dating Coach Quincy | Flirt-Psychologie
 
 Eigenständiger Ordner, getrennt von `elektro-demo` und den anderen Paketen im
 Repo. Enthält eine einzelne Landingpage (`index.html`) plus eine kleine

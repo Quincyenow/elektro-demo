@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gratis-Report sichern | Dr. Quincy – Flirt-Psychologie</title>
-<meta name="description" content="Starte deine Transformation zum selbstsicheren Mann – psychologisch fundierte Dating-Strategien von Dr. Quincy. Jetzt kostenlosen Report sichern." />
+<title>Gratis-Report sichern | Dating Coach Quincy – Flirt-Psychologie</title>
+<meta name="description" content="Starte deine Transformation zum selbstsicheren Mann – psychologisch fundierte Dating-Strategien von Dating Coach Quincy. Jetzt kostenlosen Report sichern." />
 <meta name="robots" content="noindex" />
 
 <style>
@@ -153,6 +153,37 @@
   .form-status.error{color:#e2949a}
   .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
+  /* ---------- 6. SPIN-Funnel ---------- */
+  #funnel-view[hidden]{display:none}
+  .funnel{
+    margin-top:64px;padding:36px 30px;border-radius:18px;
+    background:rgba(255,255,255,.04);border:1px solid rgba(232,200,119,.2);
+    text-align:center;max-width:var(--maxw);margin-left:auto;margin-right:auto;
+  }
+  .funnel-step{display:none;animation:funnelIn .4s ease}
+  .funnel-step.active{display:block}
+  @keyframes funnelIn{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .step-eyebrow,.step-progress{
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:10px;
+  }
+  .funnel-step h2{font-size:clamp(20px,3vw,26px);font-weight:800;margin-bottom:10px}
+  .step-lead{color:var(--muted);font-size:15px;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto}
+  .options{display:flex;flex-direction:column;gap:12px;max-width:480px;margin:22px auto 0}
+  .option-btn{
+    display:block;width:100%;text-align:left;font:inherit;font-size:15px;color:var(--ink);
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:12px;
+    padding:16px 18px;cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .15s ease;
+  }
+  .option-btn:hover{border-color:rgba(232,200,119,.5);background:rgba(232,200,119,.08)}
+  .option-btn.selected{border-color:var(--gold);background:rgba(232,200,119,.14);transform:translateY(-1px)}
+  .funnel-back{display:inline-block;margin-top:20px;font-size:13px;color:var(--muted);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit}
+  .calendly-box{margin-top:8px;border-radius:14px;overflow:hidden;background:rgba(5,11,28,.4);border:1px solid rgba(232,200,119,.18)}
+  .calendly-placeholder{display:flex;flex-direction:column;align-items:center;gap:14px;padding:32px 16px;text-align:center}
+  .calendly-placeholder p{color:var(--muted);font-size:14px;max-width:420px}
+
   footer{
     margin-top:64px;text-align:center;font-size:13px;color:rgba(174,183,204,.6);
   }
@@ -170,6 +201,7 @@
 </head>
 <body>
   <div class="wrap">
+  <div id="landing-view">
 
     <!-- ============ 1 · VIDEO-PLATZHALTER ============ -->
     <div class="video-box">
@@ -177,7 +209,7 @@
            .video-placeholder-Block darunter entfernen bzw. ausblenden -->
       <iframe
         src=""
-        title="Dr. Quincy – Dein Weg zum Dating-Erfolg"
+        title="Dating Coach Quincy – Dein Weg zum Dating-Erfolg"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
@@ -203,7 +235,7 @@
     <!-- ============ 3 · NUTZEN-HEADLINE ============ -->
     <h1 class="headline">
       Starte deine Transformation zum <span class="accent">selbstsicheren Mann</span> –
-      psychologisch fundierte Strategien von Dr. Quincy.
+      psychologisch fundierte Strategien von Dating Coach Quincy.
     </h1>
 
     <!-- ============ 4 · TRUST-SEKTION ============ -->
@@ -238,17 +270,102 @@
       <p class="form-status" id="nl-status" role="status" aria-live="polite"></p>
     </div>
 
-    <footer>
-      © 2026 Dr. Quincy · Flirt-Psychologie. Alle Rechte vorbehalten. ·
-      <a href="impressum.html" style="color:var(--gold);text-decoration:underline">Impressum</a> ·
-      <a href="datenschutz.html" style="color:var(--gold);text-decoration:underline">Datenschutzerklärung</a>
-    </footer>
+  </div>
+  <!-- /#landing-view -->
+
+  <!-- ============ 6 · SPIN-FUNNEL ============ -->
+  <div id="funnel-view" class="funnel" hidden>
+
+    <!-- Danke & Qualifizierung -->
+    <div class="funnel-step active" data-step="thanks">
+      <div class="step-eyebrow">Fast geschafft</div>
+      <h2>Danke, deine Anmeldung ist da!</h2>
+      <p class="step-lead">Dein Gratis-Report ist unterwegs. Willst du direkt den nächsten Schritt gehen? Buche jetzt dein kostenloses Erstgespräch mit Dating Coach Quincy.</p>
+      <button type="button" class="btn-submit" id="start-spin-btn" style="max-width:360px;margin:0 auto">Jetzt Erstgespräch buchen</button>
+    </div>
+
+    <!-- Frage 1 · Situation -->
+    <div class="funnel-step" data-step="q1">
+      <div class="step-progress">Frage 1 von 4</div>
+      <h2>Was ist deine größte Herausforderung in der Gesprächsführung?</h2>
+      <div class="options" data-question="q1">
+        <button type="button" class="option-btn" data-value="Nervosität & Blackout">Nervosität &amp; Blackout im Gespräch</button>
+        <button type="button" class="option-btn" data-value="Mangelndes Interesse wecken">Mangelndes Interesse wecken</button>
+        <button type="button" class="option-btn" data-value="Kommunikationsblockaden">Kommunikationsblockaden</button>
+        <button type="button" class="option-btn" data-value="Schwierigkeiten beim Ansprechen">Schwierigkeiten beim Ansprechen</button>
+      </div>
+    </div>
+
+    <!-- Frage 2 · Problem -->
+    <div class="funnel-step" data-step="q2">
+      <div class="step-progress">Frage 2 von 4</div>
+      <h2>Was hat dich bisher am meisten daran gehindert, dies nachhaltig zu verbessern?</h2>
+      <div class="options" data-question="q2">
+        <button type="button" class="option-btn" data-value="Keine klare Methode">Keine klare Methode</button>
+        <button type="button" class="option-btn" data-value="Fehlende Umsetzung im Alltag">Fehlende Umsetzung im Alltag</button>
+        <button type="button" class="option-btn" data-value="Rückfall in alte Muster">Rückfall in alte Muster</button>
+        <button type="button" class="option-btn" data-value="Zeitmangel">Zeitmangel</button>
+      </div>
+      <button type="button" class="funnel-back" data-back="q1">&larr; Zurück</button>
+    </div>
+
+    <!-- Frage 3 · Implikation -->
+    <div class="funnel-step" data-step="q3">
+      <div class="step-progress">Frage 3 von 4</div>
+      <h2>Welche Auswirkung hat diese Herausforderung aktuell auf dein Selbstvertrauen?</h2>
+      <div class="options" data-question="q3">
+        <button type="button" class="option-btn" data-value="Einschränkung im Alltag">Einschränkung im Alltag</button>
+        <button type="button" class="option-btn" data-value="Anhaltende Unsicherheit">Anhaltende Unsicherheit</button>
+        <button type="button" class="option-btn" data-value="Frustration & Selbstzweifel">Frustration &amp; Selbstzweifel</button>
+        <button type="button" class="option-btn" data-value="Vermeidung neuer Situationen">Vermeidung neuer Situationen</button>
+      </div>
+      <button type="button" class="funnel-back" data-back="q2">&larr; Zurück</button>
+    </div>
+
+    <!-- Frage 4 · Need-Payoff -->
+    <div class="funnel-step" data-step="q4">
+      <div class="step-progress">Frage 4 von 4</div>
+      <h2>Wie verbindlich ist es für dich, dieses Thema in den nächsten 30 Tagen anzugehen?</h2>
+      <div class="options" data-question="q4">
+        <button type="button" class="option-btn" data-value="Absolut verbindlich">Absolut verbindlich – ich will jetzt handeln</button>
+        <button type="button" class="option-btn" data-value="Sehr wichtig">Sehr wichtig, aber noch unsicher wie</button>
+        <button type="button" class="option-btn" data-value="Informativ">Ich informiere mich erstmal</button>
+      </div>
+      <button type="button" class="funnel-back" data-back="q3">&larr; Zurück</button>
+    </div>
+
+    <!-- Termin / Calendly -->
+    <div class="funnel-step" data-step="calendly">
+      <div class="step-eyebrow">Letzter Schritt</div>
+      <h2>Wähle jetzt deinen Wunschtermin</h2>
+      <p class="step-lead">Danke für deine Antworten! Sichere dir dein kostenloses 30-minütiges Erstgespräch mit Dating Coach Quincy.</p>
+      <div id="calendly-container" class="calendly-box" data-url="https://calendly.com/datingcoachquincy/30-minuten-erstgesprach?hide_gdpr_banner=1&background_color=0b1c3f&text_color=f7f5ef&primary_color=e8c877">
+        <div id="calendly-placeholder" class="calendly-placeholder">
+          <p>Aus Datenschutzgründen wird der Terminkalender (Calendly) erst nach deiner Zustimmung geladen. Dabei werden Daten an Calendly&nbsp;LLC (USA) übertragen.</p>
+          <button type="button" id="calendly-load-btn" class="btn-submit" style="max-width:320px">Kalender laden &amp; Termin wählen</button>
+          <a href="datenschutz.html" style="font-size:12px;color:var(--muted);text-decoration:underline">Mehr in der Datenschutzerklärung</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /#funnel-view -->
+
+  <footer>
+    © 2026 Dating Coach Quincy · Flirt-Psychologie. Alle Rechte vorbehalten. ·
+    <a href="impressum.html" style="color:var(--gold);text-decoration:underline">Impressum</a> ·
+    <a href="datenschutz.html" style="color:var(--gold);text-decoration:underline">Datenschutzerklärung</a>
+  </footer>
   </div>
 
   <script>
     const form = document.getElementById('newsletter-form');
     const status = document.getElementById('nl-status');
     const submitBtn = document.getElementById('nl-submit');
+    const landingView = document.getElementById('landing-view');
+    const funnelView = document.getElementById('funnel-view');
+
+    const lead = { name: '', email: '', answers: {} };
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -274,9 +391,12 @@
         const result = await res.json();
 
         if (res.ok && result.ok) {
-          status.textContent = 'Fast geschafft! Dein Report ist unterwegs.';
-          status.className = 'form-status success';
+          lead.name = payload.name;
+          lead.email = payload.email;
           form.reset();
+          landingView.hidden = true;
+          funnelView.hidden = false;
+          funnelView.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
           status.textContent = result.error || 'Da ist etwas schiefgelaufen. Bitte versuch es erneut.';
           status.className = 'form-status error';
@@ -288,6 +408,71 @@
         submitBtn.disabled = false;
       }
     });
+
+    // ===== SPIN-Funnel Navigation =====
+    function switchStep(name) {
+      funnelView.querySelectorAll('.funnel-step').forEach((el) => {
+        el.classList.toggle('active', el.dataset.step === name);
+      });
+      funnelView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('start-spin-btn')?.addEventListener('click', () => switchStep('q1'));
+
+    funnelView?.querySelectorAll('.funnel-back').forEach((btn) => {
+      btn.addEventListener('click', () => switchStep(btn.dataset.back));
+    });
+
+    const STEP_ORDER = ['q1', 'q2', 'q3', 'q4'];
+
+    funnelView?.querySelectorAll('.options').forEach((group) => {
+      const question = group.dataset.question;
+      group.querySelectorAll('.option-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          group.querySelectorAll('.option-btn').forEach((b) => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          lead.answers[question] = btn.dataset.value;
+
+          const idx = STEP_ORDER.indexOf(question);
+          const isLast = idx === STEP_ORDER.length - 1;
+
+          setTimeout(async () => {
+            if (isLast) {
+              switchStep('calendly');
+              try {
+                await fetch('/api/spin-summary', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(lead),
+                });
+              } catch {
+                // Termin-Buchung funktioniert unabhängig davon weiter
+              }
+            } else {
+              switchStep(STEP_ORDER[idx + 1]);
+            }
+          }, 320);
+        });
+      });
+    });
+
+    // ===== Calendly (lädt erst nach Zustimmung, DSGVO) =====
+    (function () {
+      const container = document.getElementById('calendly-container');
+      const CAL_URL = container ? container.getAttribute('data-url') : '';
+
+      function loadCalendly() {
+        if (!container || container.getAttribute('data-loaded')) return;
+        container.setAttribute('data-loaded', '1');
+        container.innerHTML = '<div class="calendly-inline-widget" data-url="' + CAL_URL + '" style="min-width:280px;height:680px;"></div>';
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        document.body.appendChild(s);
+      }
+
+      document.getElementById('calendly-load-btn')?.addEventListener('click', loadCalendly);
+    })();
   </script>
 </body>
 </html>
