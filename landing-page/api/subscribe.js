@@ -34,13 +34,7 @@ module.exports = async function handler(req, res) {
       body = {};
     }
   }
-  const { name, email, hp } = body || {};
-
-  // Honeypot: Bots füllen verstecktes Feld aus -> so tun als ob es geklappt hat.
-  if (hp) {
-    res.status(200).json({ ok: true });
-    return;
-  }
+  const { name, email } = body || {};
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     res.status(400).json({ ok: false, error: 'Bitte eine gültige E-Mail-Adresse angeben.' });

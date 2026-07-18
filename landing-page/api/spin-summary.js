@@ -85,13 +85,17 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify(notification),
     });
 
+    const text = await response.clone().text();
+    console.log('[spin-summary] resend response status:', response.status, 'body:', text);
+
     if (!response.ok) {
       res.status(502).json({ ok: false, error: 'Zusammenfassung konnte nicht gesendet werden.' });
       return;
     }
 
     res.status(200).json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.log('[spin-summary] threw:', err && err.stack ? err.stack : err);
     res.status(500).json({ ok: false, error: 'Zusammenfassung konnte nicht gesendet werden.' });
   }
 };
