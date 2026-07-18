@@ -20,6 +20,22 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+function utmToHtml(utm) {
+  if (!utm || typeof utm !== 'object') return '';
+  const labels = {
+    utm_source: 'Quelle',
+    utm_medium: 'Medium',
+    utm_campaign: 'Kampagne',
+    utm_content: 'Inhalt',
+    utm_term: 'Suchbegriff',
+  };
+  const rows = Object.keys(labels)
+    .filter((key) => utm[key])
+    .map((key) => `<p><strong>${labels[key]}:</strong> ${escapeHtml(utm[key])}</p>`)
+    .join('');
+  return rows;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'Methode nicht erlaubt.' });
@@ -34,7 +50,7 @@ module.exports = async function handler(req, res) {
       body = {};
     }
   }
-  const { name, email } = body || {};
+  const { name, email, utm } = body || {};
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     res.status(400).json({ ok: false, error: 'Bitte eine gültige E-Mail-Adresse angeben.' });
@@ -59,6 +75,7 @@ module.exports = async function handler(req, res) {
       <h2>Neue Newsletter-Anmeldung über die Landing Page</h2>
       <p><strong>Name:</strong> ${escapeHtml(name || '–')}</p>
       <p><strong>E-Mail:</strong> ${escapeHtml(email)}</p>
+      ${utmToHtml(utm)}
     `,
   };
 

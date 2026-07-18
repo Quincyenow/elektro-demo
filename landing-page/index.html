@@ -378,13 +378,35 @@
       if (videoPlaceholder) videoPlaceholder.style.display = 'none';
     }
 
+    // ===== UTM-Tracking: merkt sich, über welchen Link/welche Quelle
+    // (z.B. YouTube) jemand hierher kam, damit das in der
+    // Lead-Benachrichtigung auftaucht. Übersteht auch den Funnel-Verlauf
+    // per sessionStorage, falls zwischendurch neu geladen wird.
+    function getUtmParams() {
+      const fromUrl = {};
+      const params = new URLSearchParams(location.search);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach((key) => {
+        const value = params.get(key);
+        if (value) fromUrl[key] = value;
+      });
+      if (Object.keys(fromUrl).length) {
+        try { sessionStorage.setItem('utm_params', JSON.stringify(fromUrl)); } catch {}
+        return fromUrl;
+      }
+      try {
+        const stored = sessionStorage.getItem('utm_params');
+        if (stored) return JSON.parse(stored);
+      } catch {}
+      return {};
+    }
+
     const form = document.getElementById('newsletter-form');
     const status = document.getElementById('nl-status');
     const submitBtn = document.getElementById('nl-submit');
     const landingView = document.getElementById('landing-view');
     const funnelView = document.getElementById('funnel-view');
 
-    const lead = { name: '', email: '', answers: {} };
+    const lead = { name: '', email: '', answers: {}, utm: getUtmParams() };
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -395,6 +417,7 @@
         name: String(formData.get('name') || ''),
         email: String(formData.get('email') || ''),
         hp: String(formData.get('hp') || ''),
+        utm: lead.utm,
       };
 
       submitBtn.disabled = true;

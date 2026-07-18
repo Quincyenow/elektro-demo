@@ -13,6 +13,21 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+function utmToHtml(utm) {
+  if (!utm || typeof utm !== 'object') return '';
+  const labels = {
+    utm_source: 'Quelle',
+    utm_medium: 'Medium',
+    utm_campaign: 'Kampagne',
+    utm_content: 'Inhalt',
+    utm_term: 'Suchbegriff',
+  };
+  return Object.keys(labels)
+    .filter((key) => utm[key])
+    .map((key) => `<p><strong>${labels[key]}:</strong> ${escapeHtml(utm[key])}</p>`)
+    .join('');
+}
+
 const QUESTIONS = {
   q1: 'Größte Herausforderung in der Gesprächsführung',
   q2: 'Bisheriges Hindernis für nachhaltige Verbesserung',
@@ -34,7 +49,7 @@ module.exports = async function handler(req, res) {
       body = {};
     }
   }
-  const { name, email, answers } = body || {};
+  const { name, email, answers, utm } = body || {};
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     res.status(400).json({ ok: false, error: 'Bitte eine gültige E-Mail-Adresse angeben.' });
@@ -72,6 +87,7 @@ module.exports = async function handler(req, res) {
       <p><strong>Name:</strong> ${escapeHtml(name || '–')}</p>
       <p><strong>E-Mail:</strong> ${escapeHtml(email)}</p>
       <table cellspacing="0" cellpadding="0" style="margin-top:12px;border-collapse:collapse">${rows}</table>
+      ${utmToHtml(utm)}
     `,
   };
 
