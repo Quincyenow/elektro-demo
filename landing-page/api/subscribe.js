@@ -1,15 +1,15 @@
 // Vercel Serverless Function: nimmt E-Mail-Anmeldungen vom Landing-Page-Formular
-// entgegen und verschickt sie per Resend (https://resend.com) als E-Mail.
+// entgegen, verschickt die sofortige Report-Zustellung per Resend und trägt
+// den Kontakt zusätzlich bei Brevo ein, damit die dort eingerichtete
+// 4-teilige Willkommens-Sequenz (inkl. Double-Opt-in) automatisch startet.
 //
 // Benötigte Umgebungsvariablen (im Vercel-Projekt unter Settings -> Environment
 // Variables setzen):
 //   RESEND_API_KEY         – API-Key von resend.com
 //   LEAD_NOTIFICATION_EMAIL – Adresse, an die neue Anmeldungen gemeldet werden
 //   RESEND_FROM_EMAIL       – Absenderadresse (optional, Default: onboarding@resend.dev)
-//
-// Sobald ihr euch für ein richtiges Newsletter-Tool (z.B. Mailchimp, Brevo,
-// ConvertKit) entscheidet, kann diese Funktion durch einen Aufruf von dessen
-// API ersetzt werden – das Formular im Frontend bleibt dabei unverändert.
+//   BREVO_API_KEY           – API-Key von brevo.com (Settings -> SMTP & API -> API Keys)
+//   BREVO_LIST_ID           – Zahlen-ID der Brevo-Liste, an die die Willkommens-Sequenz hängt
 
 function escapeHtml(str) {
   return String(str)
@@ -34,6 +34,38 @@ function utmToHtml(utm) {
     .map((key) => `<p><strong>${labels[key]}:</strong> ${escapeHtml(utm[key])}</p>`)
     .join('');
   return rows;
+}
+
+async function addToBrevo(email, name) {
+  const brevoKey = process.env.BREVO_API_KEY;
+  const listId = process.env.BREVO_LIST_ID;
+  if (!brevoKey || !listId) {
+    console.log('[subscribe] Brevo skipped: BREVO_API_KEY or BREVO_LIST_ID not set');
+    return;
+  }
+
+  try {
+    const response = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'api-key': brevoKey,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        attributes: { FIRSTNAME: name || '' },
+        listIds: [Number(listId)],
+        updateEnabled: true,
+      }),
+    });
+    const text = await response.clone().text();
+    console.log('[subscribe] Brevo response status:', response.status, 'body:', text);
+  } catch (err) {
+    // Best-effort: Die Willkommens-Sequenz ist ein Zusatz, kein kritischer Pfad --
+    // ein Brevo-Fehler darf die eigentliche Anmeldung (Resend) nicht blockieren.
+    console.log('[subscribe] Brevo threw:', err && err.stack ? err.stack : err);
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -128,6 +160,8 @@ module.exports = async function handler(req, res) {
       res.status(502).json({ ok: false, error: 'Anmeldung konnte nicht gesendet werden. Bitte versuch es später erneut.' });
       return;
     }
+
+    await addToBrevo(email, name);
 
     res.status(200).json({ ok: true });
   } catch (err) {
