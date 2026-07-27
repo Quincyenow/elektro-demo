@@ -27,7 +27,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'Electrician',
+  '@type': 'EducationalOrganization',
   name: business.name,
   image: ogImageURL.toString(),
   telephone: business.phoneHref,
@@ -42,7 +42,7 @@ const schema = {
   },
   areaServed: business.areaServed,
   openingHours: business.openingHours.schema,
-  priceRange: '€€',
+  priceRange: '€€€',
   url: Astro.site?.toString(),
 };
 ---

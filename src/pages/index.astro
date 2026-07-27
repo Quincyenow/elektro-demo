@@ -5,12 +5,13 @@ import { business } from '../data/business.ts';
 ---
 
 <Layout
-  title="Elektro Stebel – Elektromeisterbetrieb in Hannover"
-  description="Elektroinstallation, Smart Home, Photovoltaik und Wallbox-Montage in Hannover und Umgebung. 10+ Jahre Erfahrung, 24h Notdienst, kostenlose Beratung."
+  title="Gespräch & Wirkung – Conversation Leadership Coaching"
+  description="Führe jedes Gespräch mit Klarheit, Präsenz und Wirkung. Professionelles Conversation Leadership Coaching für Führungskräfte, Teams und Selbstständige – deutschlandweit und online."
   canonicalPath="/"
 >
 
 <style>
+  /* ── Navigation ── */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
   .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;text-decoration:none;color:var(--white)}
   .nav-logo span{color:var(--yellow)}
@@ -30,6 +31,8 @@ import { business } from '../data/business.ts';
   .mobile-menu a{font-size:1rem;color:var(--text-muted);text-decoration:none;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.06)}
   .mobile-menu a:last-child{border-bottom:none}
   .mobile-menu .nav-cta{text-align:center;margin-top:0.5rem;padding:0.8rem;font-size:0.95rem}
+
+  /* ── Hero ── */
   .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 2rem 4rem;gap:3rem;max-width:1200px;margin:0 auto}
   .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:1.5rem}
   .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--yellow);flex-shrink:0}
@@ -37,49 +40,85 @@ import { business } from '../data/business.ts';
   .hero h1 em{color:var(--yellow);font-style:normal}
   .hero-sub{color:var(--text-muted);font-size:1rem;max-width:420px;margin-bottom:2rem;line-height:1.7}
   .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-trust{display:flex;align-items:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+  .hero-trust-item{display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text-muted)}
+  .hero-trust-item::before{content:'✓';color:var(--yellow);font-weight:700;font-size:0.9rem}
   .btn-primary{background:var(--yellow);color:var(--black);padding:0.85rem 1.8rem;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:background 0.2s,transform 0.15s;display:inline-block}
   .btn-primary:hover{background:var(--yellow-dark);transform:translateY(-1px)}
   .btn-ghost{border:1px solid rgba(255,255,255,0.15);padding:0.85rem 1.8rem;border-radius:8px;font-size:0.9rem;color:var(--white);text-decoration:none;transition:border-color 0.2s,background 0.2s;display:inline-block}
   .btn-ghost:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.04)}
-  .hero-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--gray)}
-  .hero-visual img{width:100%;height:100%;object-fit:cover;opacity:0.85}
-  .hero-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(13,13,13,0.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:1.5rem}
+  .hero-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--gray);display:flex;align-items:center;justify-content:center}
+  .hero-visual-inner{width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a 0%,#111 50%,#1c1a0f 100%);display:flex;align-items:center;justify-content:center;position:relative}
+  .hero-visual-quote{text-align:center;padding:2rem;position:relative;z-index:1}
+  .hero-visual-quote blockquote{font-family:'Syne',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;line-height:1.3;color:var(--white);margin-bottom:1rem;letter-spacing:-0.02em}
+  .hero-visual-quote blockquote em{color:var(--yellow);font-style:normal}
+  .hero-visual-attr{font-size:0.78rem;color:var(--text-muted);letter-spacing:0.04em}
+  .hero-visual-deco{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(245,200,66,0.07) 0%,transparent 70%);pointer-events:none}
+  .hero-badge{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(13,13,13,0.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.75rem 1rem;display:flex;justify-content:space-around;gap:0.5rem}
   .badge-stat{text-align:center}
   .badge-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--yellow)}
   .badge-stat-label{font-size:0.65rem;color:var(--text-muted);letter-spacing:0.04em}
+
+  /* ── Ticker ── */
   .ticker-wrap{background:var(--yellow);overflow:hidden;padding:0.65rem 0}
-  .ticker{display:flex;gap:3rem;white-space:nowrap;animation:tick 22s linear infinite}
+  .ticker{display:flex;gap:3rem;white-space:nowrap;animation:tick 28s linear infinite}
   @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .ticker-item{font-size:0.75rem;font-weight:600;color:var(--black);letter-spacing:0.04em;text-transform:uppercase}
   .ticker-dot{color:rgba(0,0,0,0.3);margin:0 0.5rem}
+
+  /* ── Shared section styles ── */
   .section{padding:4rem 1.5rem;max-width:1200px;margin:0 auto}
   .section-full{padding:4rem 1.5rem;background:var(--gray-mid)}
   .section-full-inner{max-width:1200px;margin:0 auto}
   .section-eye{font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:0.75rem}
   .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:-0.02em;margin-bottom:1rem;overflow-wrap:break-word}
   .section-sub{color:var(--text-muted);max-width:480px;line-height:1.7;margin-bottom:2.5rem}
+
+  /* ── About ── */
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
   .about-text p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem}
   .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
   .stat-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
   .stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--yellow)}
   .stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem}
+
+  /* ── Mid-page CTA Banner ── */
+  .cta-banner{background:var(--yellow);padding:4rem 1.5rem;text-align:center}
+  .cta-banner-inner{max-width:680px;margin:0 auto}
+  .cta-banner h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-0.03em;color:var(--black);line-height:1.1;margin-bottom:1rem}
+  .cta-banner p{font-size:1rem;color:rgba(13,13,13,0.7);margin-bottom:2rem;line-height:1.6}
+  .btn-dark{background:var(--black);color:var(--yellow);padding:1rem 2.4rem;border-radius:8px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s}
+  .btn-dark:hover{background:#1a1a1a;transform:translateY(-2px)}
+  .cta-banner-note{margin-top:1rem;font-size:0.8rem;color:rgba(13,13,13,0.55)}
+  .cta-banner-stats{display:flex;justify-content:center;gap:2.5rem;margin-bottom:2rem;flex-wrap:wrap}
+  .cta-bs{text-align:center}
+  .cta-bs-num{font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--black)}
+  .cta-bs-label{font-size:0.75rem;color:rgba(13,13,13,0.6);letter-spacing:0.04em}
+
+  /* ── Services ── */
   .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
   .service-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem;transition:border-color 0.2s,transform 0.2s}
   .service-card:hover{border-color:var(--yellow);transform:translateY(-3px)}
   .service-icon{font-size:1.5rem;margin-bottom:0.75rem}
   .service-name{font-weight:600;font-size:0.95rem}
   .service-desc{font-size:0.82rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5}
+
+  /* ── Process / Methode ── */
   .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
   .step{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
   .step-num{width:36px;height:36px;border-radius:50%;background:var(--yellow);color:var(--black);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;margin-bottom:0.75rem;flex-shrink:0}
   .step-title{font-weight:600;margin-bottom:0.4rem;font-size:0.9rem}
   .step-desc{font-size:0.82rem;color:var(--text-muted);line-height:1.5}
+
+  /* ── Reviews ── */
   .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
   .review-card{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:1.5rem}
   .review-stars{color:var(--yellow);font-size:0.9rem;margin-bottom:1rem}
   .review-text{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;font-style:italic}
   .review-author{font-size:0.82rem;font-weight:600}
+  .review-role{font-size:0.78rem;color:var(--text-muted);margin-top:0.15rem}
+
+  /* ── Contact ── */
   .contact-wrap{background:var(--gray);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
   .contact-info p{color:var(--text-muted);margin-bottom:1rem;font-size:0.9rem;line-height:1.7}
   .contact-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
@@ -88,6 +127,8 @@ import { business } from '../data/business.ts';
   .contact-detail-text strong{color:var(--white);display:block;font-size:0.92rem}
   .contact-quick{display:flex;gap:0.75rem;margin-top:1.5rem;flex-wrap:wrap}
   .contact-quick .btn-ghost{flex:1;text-align:center;padding:0.7rem 1rem;font-size:0.85rem}
+
+  /* ── Footer ── */
   footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
   .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;text-decoration:none;color:var(--white)}
   .footer-logo span{color:var(--yellow)}
@@ -96,6 +137,7 @@ import { business } from '../data/business.ts';
   .footer-links a{font-size:0.8rem;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
   .footer-links a:hover{color:var(--white)}
 
+  /* ── Responsive ── */
   @media(max-width:768px){
     .nav-links{display:none}
     .hamburger{display:flex}
@@ -106,8 +148,11 @@ import { business } from '../data/business.ts';
     .hero-sub{max-width:100%}
     .hero-actions{flex-direction:column}
     .hero-actions a{text-align:center}
+    .hero-trust{justify-content:flex-start}
     .section{padding:3rem 1.2rem}
     .section-full{padding:3rem 1.2rem}
+    .cta-banner{padding:3rem 1.2rem}
+    .cta-banner-stats{gap:1.5rem}
     .about-grid{grid-template-columns:1fr;gap:2rem}
     .process-steps{grid-template-columns:1fr 1fr}
     .reviews-grid{grid-template-columns:1fr}
@@ -120,19 +165,21 @@ import { business } from '../data/business.ts';
     .hero h1{font-size:1.9rem}
     .process-steps{grid-template-columns:1fr}
     .hero-badge{display:none}
+    .cta-banner-stats{flex-direction:column;gap:1rem}
   }
 </style>
 
+<!-- Navigation -->
 <nav>
-  <a href="/" class="nav-logo">⚡ Elektro <span>Stebel</span></a>
+  <a href="/" class="nav-logo">💬 Gespräch &amp; <span>Wirkung</span></a>
   <div class="nav-links">
-    <a href="#leistungen">Leistungen</a>
-    <a href="#prozess">Ablauf</a>
-    <a href="#bewertungen">Bewertungen</a>
+    <a href="#angebote">Angebote</a>
+    <a href="#methode">Methode</a>
+    <a href="#stimmen">Stimmen</a>
     <a href="#kontakt">Kontakt</a>
   </div>
   <div class="nav-right">
-    <a href="#kontakt" class="nav-cta">Termin anfragen</a>
+    <a href="#kontakt" class="nav-cta">Erstgespräch buchen</a>
     <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
     </button>
@@ -140,140 +187,176 @@ import { business } from '../data/business.ts';
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#leistungen" class="mobile-link">Leistungen</a>
-  <a href="#prozess" class="mobile-link">Ablauf</a>
-  <a href="#bewertungen" class="mobile-link">Bewertungen</a>
+  <a href="#angebote" class="mobile-link">Angebote</a>
+  <a href="#methode" class="mobile-link">Methode</a>
+  <a href="#stimmen" class="mobile-link">Stimmen</a>
   <a href="#kontakt" class="mobile-link">Kontakt</a>
-  <a href="#kontakt" class="nav-cta">Jetzt Termin vereinbaren</a>
+  <a href="#kontakt" class="nav-cta">Kostenloses Erstgespräch</a>
 </div>
 
+<!-- Hero -->
 <div class="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Elektromeisterbetrieb Hannover</div>
-    <h1>Elektrotechnik,<br>die <em>wirklich</em><br>funktioniert.</h1>
-    <p class="hero-sub">Schnell, sauber und zuverlässig. Von der klassischen Installation bis zum Smart Home – in Hannover und Umgebung.</p>
+    <div class="hero-eyebrow">Conversation Leadership Coaching</div>
+    <h1>Führe jedes Gespräch mit <em>Klarheit</em> und <em>Wirkung</em>.</h1>
+    <p class="hero-sub">Ob schwierige Mitarbeitergespräche, entscheidende Verhandlungen oder Präsentationen — lerne, Gespräche souverän zu leiten und bleibenden Eindruck zu hinterlassen.</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn-primary">Jetzt Termin vereinbaren</a>
-      <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+      <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch →</a>
+      <a href="#angebote" class="btn-ghost">Angebote ansehen</a>
+    </div>
+    <div class="hero-trust">
+      <span class="hero-trust-item">Kostenlos &amp; unverbindlich</span>
+      <span class="hero-trust-item">ICF-zertifiziert</span>
+      <span class="hero-trust-item">Online &amp; Präsenz</span>
     </div>
   </div>
   <div class="hero-visual">
-    <img src="/stebel.jpg" alt="Elektro Stebel Hannover" loading="eager" />
+    <div class="hero-visual-inner">
+      <div class="hero-visual-deco"></div>
+      <div class="hero-visual-quote">
+        <blockquote>„Wer das Gespräch<br>führt, führt<br><em>die Situation.</em>"</blockquote>
+        <p class="hero-visual-attr">— Kernprinzip des Conversation Leadership</p>
+      </div>
+    </div>
     <div class="hero-badge">
-      <div class="badge-stat"><div class="badge-stat-num">10+</div><div class="badge-stat-label">Jahre Erfahrung</div></div>
-      <div class="badge-stat"><div class="badge-stat-num">500+</div><div class="badge-stat-label">Projekte</div></div>
-      <div class="badge-stat"><div class="badge-stat-num">24h</div><div class="badge-stat-label">Erreichbar</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">8+</div><div class="badge-stat-label">Jahre Coaching</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">1.200+</div><div class="badge-stat-label">Klienten</div></div>
+      <div class="badge-stat"><div class="badge-stat-num">98%</div><div class="badge-stat-label">Empfehlen uns</div></div>
     </div>
   </div>
 </div>
 
+<!-- Ticker -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenloses Erstgespräch <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">24h erreichbar <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Online &amp; deutschlandweit <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">ICF-zertifiziertes Coaching <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Führungskräfte · Teams · Selbstständige <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Kostenloses Erstgespräch <span class="ticker-dot">•</span></span>
     <span class="ticker-item">{business.phone} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Hannover & Umgebung <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">{business.email} <span class="ticker-dot">•</span></span>
-    <span class="ticker-item">Kostenlose Beratung <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Online &amp; deutschlandweit <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">ICF-zertifiziertes Coaching <span class="ticker-dot">•</span></span>
+    <span class="ticker-item">Führungskräfte · Teams · Selbstständige <span class="ticker-dot">•</span></span>
   </div>
 </div>
 
+<!-- About -->
 <div class="section" id="about">
   <div class="about-grid">
     <div class="about-text">
-      <div class="section-eye">Über uns</div>
-      <h2 class="section-title">Gemeinsam denken wir Elektrotechnik <em style="color:var(--yellow);font-style:normal">neu</em></h2>
-      <p>In und um Hannover sind wir als Elektromeisterbetrieb für Sie da. Von der Instandhaltung bestehender Systeme bis hin zu Neuinstallationen und Smart-Lösungen.</p>
-      <p>Mit über 10 Jahren Erfahrung und mehr als 500 abgeschlossenen Projekten stehen wir für Qualität, Pünktlichkeit und faire Preise.</p>
+      <div class="section-eye">Über das Coaching</div>
+      <h2 class="section-title">Gespräche sind Führung — lerne sie zu <em style="color:var(--yellow);font-style:normal">meistern</em></h2>
+      <p>Jede Entscheidung, jede Zusammenarbeit, jeder Konflikt — alles beginnt mit einem Gespräch. Wer Gespräche bewusst führt, führt Menschen, Teams und Ergebnisse.</p>
+      <p>Mit über 8 Jahren Erfahrung und mehr als 1.200 begleiteten Klientinnen und Klienten aus Wirtschaft, Führung und Selbstständigkeit entwickeln wir eine Methode, die sofort wirkt — im Meeting, im Mitarbeitergespräch, im Alltag.</p>
       <br>
-      <a href="#kontakt" class="btn-primary">Kostenloses Angebot anfordern →</a>
+      <a href="#kontakt" class="btn-primary">Kostenloses Erstgespräch vereinbaren →</a>
     </div>
     <div class="about-stats">
-      <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Jahre Erfahrung</div></div>
-      <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Abgeschlossene Projekte</div></div>
-      <div class="stat-card"><div class="stat-num">24h</div><div class="stat-label">Erreichbar</div></div>
-      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Kundenzufriedenheit</div></div>
+      <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Jahre Coaching-Erfahrung</div></div>
+      <div class="stat-card"><div class="stat-num">1.200+</div><div class="stat-label">Begleitete Klienten</div></div>
+      <div class="stat-card"><div class="stat-num">98%</div><div class="stat-label">Weiterempfehlungsrate</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Länder aktiv</div></div>
     </div>
   </div>
 </div>
 
-<div class="section-full" id="leistungen">
+<!-- ── Prominent CTA Banner ── -->
+<div class="cta-banner" id="cta-primary">
+  <div class="cta-banner-inner">
+    <div class="cta-banner-stats">
+      <div class="cta-bs"><div class="cta-bs-num">30 Min</div><div class="cta-bs-label">Kostenlos & unverbindlich</div></div>
+      <div class="cta-bs"><div class="cta-bs-num">100%</div><div class="cta-bs-label">Individuell auf dich zugeschnitten</div></div>
+      <div class="cta-bs"><div class="cta-bs-num">Sofort</div><div class="cta-bs-label">Erste Impulse im Gespräch</div></div>
+    </div>
+    <h2>Bereit, jedes Gespräch zu gewinnen?</h2>
+    <p>Vereinbare jetzt dein kostenloses 30-minütiges Erstgespräch. Wir analysieren deine aktuelle Kommunikationssituation und zeigen dir, welche Hebel sofort wirken.</p>
+    <a href="#kontakt" class="btn-dark">Jetzt Erstgespräch buchen</a>
+    <p class="cta-banner-note">Keine Kreditkarte. Keine Verpflichtung. Einfach ein ehrliches Gespräch.</p>
+  </div>
+</div>
+
+<!-- Services / Angebote -->
+<div class="section-full" id="angebote">
   <div class="section-full-inner">
-    <div class="section-eye">Leistungen</div>
-    <h2 class="section-title">Alles aus einer Hand</h2>
-    <p class="section-sub">Von der Planung bis zur Fertigstellung – wir sind Ihr kompetenter Ansprechpartner.</p>
+    <div class="section-eye">Angebote</div>
+    <h2 class="section-title">Was du bei uns lernst</h2>
+    <p class="section-sub">Von der Einzelbegleitung bis zum Team-Workshop — wähle das Format, das zu dir passt.</p>
     <div class="services-grid">
-      <div class="service-card"><div class="service-icon">🔌</div><div class="service-name">Elektroinstallation</div><div class="service-desc">Neuinstallation und Modernisierung elektrischer Anlagen</div></div>
-      <div class="service-card"><div class="service-icon">💡</div><div class="service-name">Beleuchtung & LED</div><div class="service-desc">Energieeffiziente Lichttechnik für jeden Bereich</div></div>
-      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">Smart Home</div><div class="service-desc">Intelligente Haussteuerung und Automatisierung</div></div>
-      <div class="service-card"><div class="service-icon">☀️</div><div class="service-name">Photovoltaik</div><div class="service-desc">Solaranlagen für nachhaltige Energieerzeugung</div></div>
-      <div class="service-card"><div class="service-icon">🚗</div><div class="service-name">Wallbox</div><div class="service-desc">E-Ladestation für zuhause – schnell und sicher</div></div>
-      <div class="service-card"><div class="service-icon">🚨</div><div class="service-name">Störungsdienst</div><div class="service-desc">24h Notfallservice bei Stromausfall & Störungen</div></div>
-      <div class="service-card"><div class="service-icon">🔒</div><div class="service-name">Sicherheitstechnik</div><div class="service-desc">Alarmanlage, Kamera und Zugangskontrolle</div></div>
-      <div class="service-card"><div class="service-icon">🏗️</div><div class="service-name">Gebäudeinstallation</div><div class="service-desc">Elektrik für Neubauten und Gewerbegebäude</div></div>
+      <div class="service-card"><div class="service-icon">🎯</div><div class="service-name">Einzelcoaching</div><div class="service-desc">1:1 Sessions für maximale persönliche Wirkung in jedem Gespräch</div></div>
+      <div class="service-card"><div class="service-icon">💼</div><div class="service-name">Führungskräfte-Coaching</div><div class="service-desc">Autoritativ führen und überzeugend kommunizieren auf Top-Level</div></div>
+      <div class="service-card"><div class="service-icon">🗣️</div><div class="service-name">Kommunikationstraining</div><div class="service-desc">Gruppentraining für Teams — praxisnah und sofort anwendbar</div></div>
+      <div class="service-card"><div class="service-icon">🎓</div><div class="service-name">Online-Kurs</div><div class="service-desc">Selbstlernprogramm: Conversation Leadership im eigenen Tempo</div></div>
+      <div class="service-card"><div class="service-icon">🤝</div><div class="service-name">Team-Workshop</div><div class="service-desc">Gesprächskultur im Team dauerhaft verbessern</div></div>
+      <div class="service-card"><div class="service-icon">🧠</div><div class="service-name">Schwierige Gespräche</div><div class="service-desc">Konflikte deeskalieren, Klartext reden, Lösungen erzielen</div></div>
+      <div class="service-card"><div class="service-icon">🎤</div><div class="service-name">Präsentation & Vortrag</div><div class="service-desc">Überzeugend auftreten vor jedem Publikum</div></div>
+      <div class="service-card"><div class="service-icon">⚡</div><div class="service-name">Intensiv-Retreat</div><div class="service-desc">Zweitägiges Tiefentauchen mit messbaren, sofortigen Ergebnissen</div></div>
     </div>
   </div>
 </div>
 
-<div class="section" id="prozess">
-  <div class="section-eye">Unser Ablauf</div>
-  <h2 class="section-title">Schritt für Schritt zu Ihrer Lösung</h2>
-  <p class="section-sub">Transparent, zuverlässig und ohne Überraschungen.</p>
+<!-- Methode / Process -->
+<div class="section" id="methode">
+  <div class="section-eye">Unsere Methode</div>
+  <h2 class="section-title">Wie Transformation entsteht</h2>
+  <p class="section-sub">Kein Einheitsprogramm — jeder Klient bekommt eine Roadmap, die zu seiner Situation passt.</p>
   <div class="process-steps">
-    <div class="step"><div class="step-num">1</div><div class="step-title">Beratung</div><div class="step-desc">Sie kontaktieren uns – wir melden uns innerhalb von 24h und besprechen Ihr Projekt.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-title">Planung</div><div class="step-desc">Wir beraten Sie ganzheitlich und erstellen ein unverbindliches Angebot.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-title">Ausführung</div><div class="step-desc">Wir setzen Ihr Projekt professionell um und halten Sie informiert.</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-title">Fertigstellung</div><div class="step-desc">Abnahme, Übergabe und vollständige Dokumentation.</div></div>
+    <div class="step"><div class="step-num">1</div><div class="step-title">Erstgespräch</div><div class="step-desc">30 Minuten kostenlos: Wir analysieren deine Ausgangslage und definieren, wo der größte Hebel liegt.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Diagnose</div><div class="step-desc">Wir beleuchten deine Kommunikationsmuster und entwickeln einen individuellen Entwicklungsplan.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Training</div><div class="step-desc">Intensive Coaching-Sessions mit echten Situationen — du übst, was du sofort brauchst.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Transfer</div><div class="step-desc">Das Gelernte festigt sich im Alltag. Wir begleiten und justieren, bis es sitzt.</div></div>
   </div>
 </div>
 
-<div class="section-full" id="bewertungen">
+<!-- Reviews / Stimmen -->
+<div class="section-full" id="stimmen">
   <div class="section-full-inner">
-    <div class="section-eye">Bewertungen</div>
-    <h2 class="section-title">Das sagen unsere Kunden</h2>
-    <p class="section-sub">Echte Stimmen aus Hannover und Umgebung.</p>
+    <div class="section-eye">Stimmen</div>
+    <h2 class="section-title">Was Klienten sagen</h2>
+    <p class="section-sub">Echte Ergebnisse von echten Menschen.</p>
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Schnelle und professionelle Arbeit. Herr Stebel hat unsere Wallbox perfekt installiert und alles sauber erklärt. Absolute Empfehlung!"</p>
-        <div class="review-author">Michael K., Hannover</div>
+        <p class="review-text">„Nach dem Coaching mit Jana habe ich mein erstes schwieriges Mitarbeitergespräch geführt — ruhig, klar, auf Augenhöhe. Das hätte ich mir vorher nicht zugetraut."</p>
+        <div class="review-author">Markus T.</div>
+        <div class="review-role">Abteilungsleiter, Hannover</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Bei unserem Stromausfall war das Team innerhalb von 2 Stunden vor Ort. Sehr faire Preise und top Leistung!"</p>
-        <div class="review-author">Sandra M., Langenhagen</div>
+        <p class="review-text">„Ich habe zwei Wochen nach dem Intensiv-Retreat eine entscheidende Verhandlung gewonnen. Die Techniken funktionieren — auch unter Druck."</p>
+        <div class="review-author">Sarah K.</div>
+        <div class="review-role">Selbstständige Unternehmensberaterin, Hamburg</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Die Smart-Home Installation hat unser Zuhause komplett verändert. Sehr saubere Arbeit und freundlicher Service."</p>
-        <div class="review-author">Thomas B., Garbsen</div>
+        <p class="review-text">„Unser Team-Workshop hat die Art, wie wir intern kommunizieren, komplett verändert. Weniger Missverständnisse, schnellere Entscheidungen."</p>
+        <div class="review-author">Dr. Lena W.</div>
+        <div class="review-role">Geschäftsführerin, Berlin</div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Contact -->
 <div class="section" id="kontakt">
   <div class="section-eye">Kontakt</div>
-  <h2 class="section-title">Jetzt Termin vereinbaren</h2>
-  <p class="section-sub">24 Stunden täglich für Sie erreichbar.</p>
+  <h2 class="section-title">Erstgespräch vereinbaren</h2>
+  <p class="section-sub">Kostenlos, unverbindlich, 30 Minuten — dein erster Schritt zu kraftvollerer Kommunikation.</p>
   <div class="contact-wrap">
     <div class="contact-info">
-      <p>Wir sind Ihr zuverlässiger Partner für alle Elektroarbeiten in Hannover und Umgebung. Füllen Sie das Formular aus – wir melden uns innerhalb von 24h zurück.</p>
+      <p>Füll das Formular aus oder ruf direkt an. Wir melden uns innerhalb von 24h und finden gemeinsam den passenden Termin für dein Erstgespräch.</p>
       <div class="contact-detail">
         <div class="contact-detail-icon">📞</div>
-        <div class="contact-detail-text"><strong>{business.phone}</strong>Mo–So, 24h erreichbar</div>
+        <div class="contact-detail-text"><strong>{business.phone}</strong>{business.openingHours.display}</div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-icon">✉️</div>
         <div class="contact-detail-text"><strong>{business.email}</strong>Antwort innerhalb 24h</div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-icon">📍</div>
-        <div class="contact-detail-text"><strong>Hannover & Umgebung</strong>Einsatzgebiet Region Hannover</div>
+        <div class="contact-detail-icon">🌍</div>
+        <div class="contact-detail-text"><strong>Online &amp; Präsenz</strong>Deutschlandweit, auch international</div>
       </div>
       <div class="contact-quick">
         <a href={`tel:${business.phoneHref}`} class="btn-ghost">📞 Jetzt anrufen</a>
@@ -287,7 +370,7 @@ import { business } from '../data/business.ts';
 </div>
 
 <footer>
-  <a href="/" class="footer-logo">⚡ Elektro <span>Stebel</span></a>
+  <a href="/" class="footer-logo">💬 Gespräch &amp; <span>Wirkung</span></a>
   <div class="footer-copy">© {new Date().getFullYear()} {business.name} | {business.address.city}</div>
   <div class="footer-links">
     <a href="/impressum/">Impressum</a>

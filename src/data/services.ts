@@ -6,12 +6,12 @@ export interface Service {
 }
 
 export const services: Service[] = [
-  { slug: 'elektroinstallation', icon: '🔌', name: 'Elektroinstallation', shortDesc: 'Neuinstallation und Modernisierung elektrischer Anlagen' },
-  { slug: 'beleuchtung-led', icon: '💡', name: 'Beleuchtung & LED', shortDesc: 'Energieeffiziente Lichttechnik für jeden Bereich' },
-  { slug: 'smart-home', icon: '🏠', name: 'Smart Home', shortDesc: 'Intelligente Haussteuerung und Automatisierung' },
-  { slug: 'photovoltaik', icon: '☀️', name: 'Photovoltaik', shortDesc: 'Solaranlagen für nachhaltige Energieerzeugung' },
-  { slug: 'wallbox', icon: '🚗', name: 'Wallbox', shortDesc: 'E-Ladestation für zuhause – schnell und sicher' },
-  { slug: 'stoerungsdienst', icon: '🚨', name: 'Störungsdienst', shortDesc: '24h Notfallservice bei Stromausfall & Störungen' },
-  { slug: 'sicherheitstechnik', icon: '🔒', name: 'Sicherheitstechnik', shortDesc: 'Alarmanlage, Kamera und Zugangskontrolle' },
-  { slug: 'gebaeudeinstallation', icon: '🏗️', name: 'Gebäudeinstallation', shortDesc: 'Elektrik für Neubauten und Gewerbegebäude' },
+  { slug: 'einzelcoaching', icon: '🎯', name: 'Einzelcoaching', shortDesc: '1:1 Sessions für maximale persönliche Wirkung' },
+  { slug: 'fuehrungskraefte', icon: '💼', name: 'Führungskräfte-Coaching', shortDesc: 'Autoritativ führen und überzeugen auf Top-Level' },
+  { slug: 'kommunikationstraining', icon: '🗣️', name: 'Kommunikationstraining', shortDesc: 'Gruppentraining für Teams und Abteilungen' },
+  { slug: 'online-kurs', icon: '🎓', name: 'Online-Kurs', shortDesc: 'Selbstlernprogramm im eigenen Tempo absolvieren' },
+  { slug: 'team-workshop', icon: '🤝', name: 'Team-Workshop', shortDesc: 'Gesprächskultur im Team nachhaltig verbessern' },
+  { slug: 'konfliktgespraeche', icon: '🧠', name: 'Schwierige Gespräche', shortDesc: 'Konflikte deeskalieren und Lösungen erzielen' },
+  { slug: 'vortrag-praesentation', icon: '🎤', name: 'Präsentation & Vortrag', shortDesc: 'Überzeugend auftreten vor jeder Zuhörerschaft' },
+  { slug: 'intensiv-wochenende', icon: '⚡', name: 'Intensiv-Retreat', shortDesc: 'Zweitägiges Tiefentauchen mit messbaren Ergebnissen' },
 ];
