@@ -1,0 +1,14 @@
+{
+  "name": "instagram-webhook",
+  "version": "1.0.0",
+  "description": "Instagram webhook listener: auto-DM trigger on keyword comments",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
